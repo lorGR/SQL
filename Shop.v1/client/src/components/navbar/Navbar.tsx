@@ -9,7 +9,7 @@ const Navbar = () => {
             <Link to="">הסל שלי</Link>
         </div>
         <div className="navbar__description">
-            logo
+            <Link to="/">LOGO</Link>
         </div>
     </nav>
   )

@@ -5,8 +5,7 @@ import Sidenav from '../../components/sidenav/Sidenav';
 const Home = () => {
   return (
     <div className='home'>
-      <Navbar />
-      <Sidenav />
+      home
     </div>
   )
 }
