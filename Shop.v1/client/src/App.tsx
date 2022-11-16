@@ -11,13 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} >
             <Route index element={<Home />} />
-            <Route path="/mac_store" element={<Products storeType='Mac'/>} />
-            <Route path="/iphone_store" element={<Products storeType='iPhone' />} />
-            <Route path="/ipad_store" element={<Products storeType='iPad'/>} />
-            <Route path="/apple_watch_store" element={<Products storeType='Apple Watch'/>} />
-            <Route path="/air_pods_store" element={<Products storeType='Air Pods'/>} />
-            <Route path="/air_tag_store" element={<Products storeType='Air Tag'/>} />
-            <Route path="/apple_tv_store" element={<Products storeType='Apple Watch' />} />
+            <Route path="/store/:storeType" element={<Products />}/>
           </Route>
         </Routes>
       </BrowserRouter>
