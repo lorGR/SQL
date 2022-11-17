@@ -1,10 +1,8 @@
 import express from "express";
-import { getproductPrice, getProductsName } from "./productsCtrl";
-
+import { getProductsByType } from "./productsCtrl";
 
 const router = express.Router();
 
 router
-    .post('/get-products-name', getProductsName)
-    .post('/get-product-price', getproductPrice)
+    .post("/get-products-by-type", getProductsByType)
 export default router;

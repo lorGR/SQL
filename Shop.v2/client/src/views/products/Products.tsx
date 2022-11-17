@@ -1,33 +1,25 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getProductPrice, getProductsName } from "./API/productsAPI";
+import { useEffect } from "react";
+import axios from "axios";
+import { create } from "./productsAPI";
 
 const Products = () => {
     const { storeType } = useParams();
 
-    const [productsNames, setProductsNames] = useState<string[]>();
-    const [products, setProducts] = useState<any>();
-
-    async function getProductsNames() {
-        const prodNames = await getProductsName(storeType!);
-        setProductsNames(prodNames);
-    }
-
-    async function getProductsPrice() {
-        if (productsNames !== undefined) {
-            const prods: Array<any> = []
-            productsNames.forEach(async (productName) => {
-                const tempProd = await getProductPrice(productName);
-                // prods.push(tempProd);
-                setProducts((prevState: any) => [...prevState, tempProd]);
-            });
-            // setProducts(prods);
+    async function getProductsByType(storeType: string) {
+        try {
+            const { data } = await axios.post("/products/get-products-by-type", { storeType });
+            if (!data) throw new Error("Couldn't receive data from axios '/get-products-by-type' ");
+            const { result } = data;
+            console.log(result);            
+            create(result);
+        } catch (error) {
+            console.error(error);
         }
     }
 
     useEffect(() => {
-        getProductsNames();
-        getProductsPrice();
+        storeType !== undefined && getProductsByType(storeType)
     }, [storeType]);
 
     return (
