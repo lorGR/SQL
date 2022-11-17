@@ -8,8 +8,8 @@ const Storenav = () => {
         <Link to="/store/ipad">iPad</Link>
         <Link to="/store/apple_watch">Apple Watch</Link>
         <Link to="/store/air_pods">AirPods</Link>
-        <Link to="/store/air_tag">AirTag</Link>
         <Link to="/store/apple_tv">Apple TV</Link>
+        {/* <Link to="/store/air_tag">AirTag</Link> */}
     </div>
   )
 }

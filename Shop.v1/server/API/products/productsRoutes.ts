@@ -1,9 +1,10 @@
 import express from "express";
-import { getStoreType } from "./productsCtrl";
+import { getProductsName } from "./productsCtrl";
+
 
 const router = express.Router();
 
 router
-    .post('/get-store-type', getStoreType);
-
+    .post('/get-products-name', getProductsName);
+    
 export default router;

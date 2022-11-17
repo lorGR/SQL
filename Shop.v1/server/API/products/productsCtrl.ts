@@ -1,7 +1,7 @@
 import express from "express";
 import { connection } from "../../DB/databaseSQL";
 
-export function getStoreType(req: express.Request, res: express.Response) {
+export function getProductsName(req: express.Request, res: express.Response) {
     try {
         const { storeTypeParam } = req.body;
         if (!storeTypeParam) throw new Error("Couldn't receive storeType from req.body");
