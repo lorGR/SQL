@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { extractUniqueProductArray } from "./productsHelper";
 import { Product } from "../products/productsHelper";
+import ProductCard from "../../components/productCard/ProductCard";
 
 const Products = () => {
     const { storeType } = useParams();
@@ -29,11 +30,9 @@ const Products = () => {
             {storeType}
             {storeProducts?.map((product ,idx) => {
                 return (
-                    <div key={idx}>
-                        <h1>{product.name}</h1>
-                        <p>{product.price}</p>
-                        <span>{product.price_eilat}</span>
-                    </div>
+                    <Link to={product.name} key={idx}>
+                        <ProductCard productName={product.name}/>
+                    </Link>
                 );
             })};
         </div>
