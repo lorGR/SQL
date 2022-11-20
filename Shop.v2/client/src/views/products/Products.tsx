@@ -14,7 +14,7 @@ const Products = () => {
             const { data } = await axios.post("/products/get-products-by-type", { storeType });
             if (!data) throw new Error("Couldn't receive data from axios '/get-products-by-type' ");
             const { result } = data;
-            const products = await extractUniqueProductArray(result);
+            const products = await extractUniqueProductArray(result, 'name');
             setStoreProducts(products);
         } catch (error) {
             console.error(error);
