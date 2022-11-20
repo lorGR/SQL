@@ -60,8 +60,8 @@ const Registration = () => {
                 <div className="registration__login-details">
                     <h3>פרטי התחברות</h3>
                     <sup>*</sup>
-                    <label htmlFor="confrimEmail">דוא״ל</label>
-                    <input type="email" name="confrimEmail" id="confrimEmail" />
+                    <label htmlFor="confirmEmail">דוא״ל</label>
+                    <input type="email" name="confirmEmail" id="confirmEmail" />
 
                     <sup>*</sup>
                     <label htmlFor="password">סיסמה</label>

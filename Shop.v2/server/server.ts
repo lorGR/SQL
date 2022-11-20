@@ -9,6 +9,9 @@ app.use(express.json());
 import productsRoutes from "./API/products/productsRoutes";
 app.use("/products", productsRoutes);
 
+import usersRoutes from "./API/users/usersRoutes";
+app.use("/users", usersRoutes);
+
 // app.get("/insert-prod", (req, res) => {
     // try {
     //     const colors = ['Space Gray', 'Pink', 'Green', 'Blue', 'Silver'];

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 export interface User {
-    first_name: string,
+    firstName: string,
     lastName: string,
     identifierNumber: number,
     phoneNumber: number,
@@ -10,7 +10,7 @@ export interface User {
     city: string,
     streetAddress: string,
     houseNumber: number,
-    postalCode?: number,
+    postalCode: number,
     password: string
 }
 
