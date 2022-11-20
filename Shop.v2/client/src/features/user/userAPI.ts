@@ -31,6 +31,7 @@ export const registrationAsync = createAsyncThunk(
             });
             if(!data) throw new Error("Couldn't receive data from axios POST '/register-user'");
             console.log(data);
+            return data;
         } catch (error) {
             console.error(error);
         }

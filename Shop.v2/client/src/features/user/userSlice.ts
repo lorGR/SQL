@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { registrationAsync } from "./userAPI";
 
 export interface User {
     firstName: string,
@@ -25,9 +26,9 @@ export interface UserState {
     status: Status
 }
 
-const initialState : UserState  = {
-    value : null,
-    status : Status.IDLE
+const initialState: UserState = {
+    value: null,
+    status: Status.IDLE
 }
 
 export const userSlice = createSlice({
@@ -35,7 +36,17 @@ export const userSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-
+        builder
+            .addCase(registrationAsync.pending, (state) => {
+                state.status = Status.LOADING;
+            })
+            .addCase(registrationAsync.fulfilled, (state, action) => {
+                state.status = Status.IDLE;
+                state.value = action.payload;
+            })
+            .addCase(registrationAsync.fulfilled, (state) => {
+                state.status = Status.FAILED;
+            });
     }
 });
 
