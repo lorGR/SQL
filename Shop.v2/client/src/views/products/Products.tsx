@@ -34,7 +34,7 @@ const Products = () => {
                         <ProductCard productName={product.name}/>
                     </Link>
                 );
-            })};
+            })}
         </div>
     )
 }
