@@ -1,8 +1,22 @@
 const Registration = () => {
+
+    const handleRegistration = (event: React.FormEvent<HTMLFormElement> | any) => {
+        try {
+            event.preventDefault();
+            const { firstName, lastName, identifierNumber,
+                phoneNumber, email, confirmEmail, city,
+                streetAddress, houseNumber, postalCode,
+                password, confirmPassword } = event.target.elements;
+            
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="registration" dir="rtl">
             <h1>יצירת חשבון</h1>
-            <form >
+            <form onSubmit={handleRegistration}>
                 <div className="registration__personal-details">
                     <h3>פרטיים אישיים</h3>
                     <sup>*</sup>
@@ -15,7 +29,11 @@ const Registration = () => {
 
                     <sup>*</sup>
                     <label htmlFor="identifierNumber">ת.ז</label>
-                    <input type="text" name="identifierNumber" id="identifierNumber" />
+                    <input type="number" name="identifierNumber" id="identifierNumber" />
+
+                    <sup>*</sup>
+                    <label htmlFor="phoneNumber">טלפון נייד של המזמין</label>
+                    <input type="number" name="phoneNumber" id="phoneNumber" />
 
                     <sup>*</sup>
                     <label htmlFor="email">דוא״ל</label>
@@ -47,11 +65,11 @@ const Registration = () => {
 
                     <sup>*</sup>
                     <label htmlFor="password">סיסמה</label>
-                    <input type="password" name="password" id="password" />
+                    <input type="password" name="password" id="password" autoComplete="true"/>
 
                     <sup>*</sup>
                     <label htmlFor="confirmPassword">אשר סיסמה</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" />
+                    <input type="password" name="confirmPassword" id="confirmPassword" autoComplete="true"/>
                 </div>
                 <div className="registration__sumbition">
                     <input type="reset" value="נקה" />
@@ -59,7 +77,7 @@ const Registration = () => {
                 </div>
             </form>
         </div>
-    )
+    );
 }
 
 export default Registration;
