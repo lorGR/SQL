@@ -55,11 +55,40 @@ export async function registerUser(req: express.Request, res: express.Response) 
     }
 }
 
+export async function loginUser(req: express.Request, res: express.Response) {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) throw new Error("Couldn't receive email or password from req.body");
+
+        const sql = `SELECT * FROM users WHERE email ='${email}'`;
+        connection.query(sql, async (error, result) => {
+            try {
+                if (error) throw error;
+                const isMatch = await bcrypt.compare(password, result[0].password);
+                if (!isMatch) throw new Error("Email or password incorrect");
+                
+                const cookie = { userId: result[0].user_id };
+                const secret = process.env.JWT_SECRET;
+                if (!secret) throw new Error("Couldn't load secret from .env");
+
+                const JWTCookie = jwt.encode(cookie, secret);
+
+                res.cookie("userID", JWTCookie);
+                res.send({ loggedIn: true })
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
 export async function getUserByCookie(req: express.Request, res: express.Response) {
     try {
         const secret = process.env.JWT_SECRET;
         if (!secret) throw new Error("Couldn't load secret from .env");
-        
+
         const { userID } = req.cookies;
         if (!userID) throw new Error("Couldn't receive / find cookie named userId");
 

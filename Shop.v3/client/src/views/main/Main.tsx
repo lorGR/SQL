@@ -9,11 +9,11 @@ import { selectUser } from "../../features/user/userSlice";
 
 const Main = () => {
 
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(getUserByCookie());
-    },[]);
+    // useEffect(() => {
+    //     dispatch(getUserByCookie());
+    // },[]);
 
     return (
         <div>

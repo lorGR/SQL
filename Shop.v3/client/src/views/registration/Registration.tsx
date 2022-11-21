@@ -10,9 +10,11 @@ const Registration = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        dispatch(getUserByCookie());
+        const allCookies = document.cookie;
+        if(allCookies.length > 0) {
+            dispatch(getUserByCookie());
+        }
     }, [])
 
     const handleRegistration = async (event: React.FormEvent<HTMLFormElement> | any) => {
@@ -35,7 +37,6 @@ const Registration = () => {
             if (data.registered === true) {
                 navigate("/");
             }
-            // dispatch(registrationAsync({ firstName, lastName, identifierNumber, phoneNumber, email, confirmEmail, city, streetAddress, houseNumber, postalCode, password, confirmPassword })) ;
         } catch (error) {
             console.error(error);
         }

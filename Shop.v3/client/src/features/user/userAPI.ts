@@ -1,21 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface RegistrationProps {
-    firstName: string,
-    lastName: string,
-    identifierNumber: number,
-    phoneNumber: number,
-    email: string,
-    city: string,
-    streetAddress: string,
-    houseNumber: number,
-    postalCode: number,
-    password: string
-    confirmEmail: string,
-    confirmPassword: string
-}
-
 export const getUserByCookie = createAsyncThunk(
     'get-user-by-cookie',
     async () => {

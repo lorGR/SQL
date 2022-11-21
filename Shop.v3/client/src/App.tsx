@@ -10,7 +10,7 @@ import Registration from './views/registration/Registration';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" dir='rtl'>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} >

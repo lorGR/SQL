@@ -7,9 +7,12 @@ import { getUserByCookie } from '../../features/user/userAPI';
 const Home = () => {
   
   const dispatch = useAppDispatch();
-
+  
   useEffect(() => {
-    dispatch(getUserByCookie());
+    const allCookies = document.cookie;
+        if(allCookies.length > 0) {
+            dispatch(getUserByCookie());
+        }
   },[])
 
   return (

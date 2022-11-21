@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { getUserByCookie } from "../../features/user/userAPI";
@@ -8,11 +9,26 @@ import { getUserByCookie } from "../../features/user/userAPI";
 const MyAccount = () => {
 
     const dispatch = useAppDispatch();
-
     useEffect(() => {
-        dispatch(getUserByCookie());
+        const allCookies = document.cookie;
+        if(allCookies.length > 0) {
+            console.log("Cookies not empty");
+            dispatch(getUserByCookie());
+        }
     }, [])
-    
+
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement> | any) => {
+        try {
+            event.preventDefault();
+            const [email, password] = [event.target.elements.email.value, event.target.password.value];
+            const { data } = await axios.post("/users/login-user", { email, password });
+            if (!data) throw new Error("Couldn't receive data from axios POST '/login-user'");
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <div className="my-account">
             <h1>אזור אישי</h1>
@@ -28,9 +44,9 @@ const MyAccount = () => {
                     <h2>לקוח חוזר</h2>
                     <p>אם כבר יש לך חשבון לקוח בחנות שלנו הנך מוזמן להתחבר</p>
                     {/* create component of login */}
-                    <form>
-                        <input type="email" name="" id="" placeholder="דוא״ל" />
-                        <input type="text" name="" id="" placeholder="סיסמה" />
+                    <form onSubmit={handleLogin}>
+                        <input type="email" name="email" id="email" placeholder="דוא״ל" />
+                        <input type="password" name="password" id="password" placeholder="סיסמה" autoComplete="false" />
                         <button>התחבר</button>
                     </form>
                 </div>
