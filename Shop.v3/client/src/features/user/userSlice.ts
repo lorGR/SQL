@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { registrationAsync } from "./userAPI";
+import { getUserByCookie } from "./userAPI";
 
 export interface User {
     firstName: string,
@@ -22,7 +22,7 @@ export enum Status {
 }
 
 export interface UserState {
-    value: User | null
+    value: User | null | any
     status: Status
 }
 
@@ -37,16 +37,16 @@ export const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(registrationAsync.pending, (state) => {
+            .addCase(getUserByCookie.pending ,(state) => {
                 state.status = Status.LOADING;
             })
-            .addCase(registrationAsync.fulfilled, (state, action) => {
+            .addCase(getUserByCookie.fulfilled, (state, action) => {
                 state.status = Status.IDLE;
                 state.value = action.payload;
             })
-            .addCase(registrationAsync.rejected, (state) => {
+            .addCase(getUserByCookie.rejected, (state) => {
                 state.status = Status.FAILED;
-            });
+            })
     }
 });
 
