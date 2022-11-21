@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { getUserByCookie } from "../../features/user/userAPI"
 import { User } from "../../features/user/userModel"
@@ -17,6 +17,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     const { productName } = useParams();
     const [productId, setProductId] = useState<number | null>(null);
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const user: User = useAppSelector(selectUser);
     const userId = user.user_id;
@@ -100,7 +101,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
             if (productId !== null) {
                 const { data } = await axios.post("/products/add-to-cart", { productId, userId });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/add-to-cart'");
-                console.log(data);
+                navigate("/cart");
             }
 
         } catch (error) {
@@ -165,6 +166,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     );
                 })
             }
+            {/* // TODO: */}
+            {/* // Display the amount of money next to button */}
             {user && <button>הוסף לסל</button>}
             {!user &&
                 <div>

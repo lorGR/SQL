@@ -154,11 +154,30 @@ export async function addToCart(req: express.Request, res: express.Response) {
         connection.query(sql, (error, result) => {
             try {
                 if (error) throw error;
-                res.send({msg: "product was added"});
+                res.send({ msg: "product was added" });
             } catch (error) {
                 res.status(500).send({ error: error.message });
             }
         })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function getUserProducts(req: express.Request, res: express.Response) {
+    try {
+        const { userId } = req.body;
+        if (!userId) throw new Error("Couldn't receive userId from req.body Ctrl: getUserProducts");
+
+        const sql = `SELECT * FROM products WHERE product_id IN (SELECT product_id FROM cart WHERE user_id = '${userId}')`;
+        connection.query(sql, (error, result) => {
+            try {
+                if(error) throw error;
+                res.send(result);
+            } catch (error) {   
+                res.status(500).send({ error: error.message });
+            }
+        });
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

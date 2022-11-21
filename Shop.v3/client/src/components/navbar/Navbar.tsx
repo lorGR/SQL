@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="navbar__menu">
         <Link to="">חיפוש</Link>
         <Link to="/my-account">החשבון שלי</Link>
-        <Link to="">הסל שלי</Link>
+        <Link to="/cart">הסל שלי</Link>
       </div>
       <div className="navbar__greet-user">
         {!user  && <p>שלום אורח</p>}
