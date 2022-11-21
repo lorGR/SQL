@@ -1,4 +1,9 @@
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import { getUserByCookie } from "../../features/user/userAPI"
+import { User } from "../../features/user/userModel"
+import { selectUser } from "../../features/user/userSlice"
 import { ProductColors, ProductInfo } from "../../views/product/Product"
 
 interface ProductFormProps {
@@ -8,9 +13,17 @@ interface ProductFormProps {
 
 const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors }) => {
     const { storeType } = useParams();
+
+    const user: User = useAppSelector(selectUser);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(getUserByCookie());
+    },[]);
+
     return (
+        // TODO:
         // render product img
-        // <img src="" alt="" />
         <form>
             {productInfo[0].storage !== null &&
                 productInfo.map((productStorage, idx) => {
@@ -33,14 +46,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     );
                 })
             }
-            {productColors.length > 0 &&
+            {productColors.length > 0 && productColors[0].color !== null &&
                 productColors.map((productColor, idx) => {
                     // TODO : 
                     // on change color change the image above
                     return (
                         <div key={idx}>
                             <label htmlFor={productColor.color}>{productColor.color}</label>
-                            <input type="radio" name="productColor" id={productColor.color} value={productColor.color} required/>
+                            <input type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
                         </div>
                     );
                 })
@@ -50,16 +63,18 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     return (
                         <div key={idx}>
                             <label htmlFor={productModel.model!}>{productModel.model}</label>
-                            <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required/>
+                            <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
                         </div>
                     );
                 })
             }
-            {/* TODO : */}
-            {/* Check if user is logged in  */}
-            {/* If not logged in: - alert you must be a logged in */}
-            {/* If logged in - add to cart */}
-            <button>הוסף לסל</button>
+            {user && <button>הוסף לסל</button>} 
+            {!user && 
+                <div>
+                    <button disabled>הוסף לסל </button>
+                    <p>עלייך להירשם או להתחבר בכדי להוסיף מוצר זה לסל הקניות</p>
+                </div>
+            }
         </form>
     )
 }
