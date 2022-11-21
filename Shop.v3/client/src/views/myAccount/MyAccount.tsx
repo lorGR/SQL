@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/hooks";
 import { getUserByCookie } from "../../features/user/userAPI";
 
@@ -8,13 +8,11 @@ import { getUserByCookie } from "../../features/user/userAPI";
 
 const MyAccount = () => {
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    
     useEffect(() => {
-        const allCookies = document.cookie;
-        if(allCookies.length > 0) {
-            console.log("Cookies not empty");
-            dispatch(getUserByCookie());
-        }
+        dispatch(getUserByCookie());
     }, [])
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement> | any) => {
@@ -23,7 +21,9 @@ const MyAccount = () => {
             const [email, password] = [event.target.elements.email.value, event.target.password.value];
             const { data } = await axios.post("/users/login-user", { email, password });
             if (!data) throw new Error("Couldn't receive data from axios POST '/login-user'");
-            console.log(data);
+            if(data.loggedIn === true) {
+                navigate("/");
+            }
         } catch (error) {
             console.error(error);
         }

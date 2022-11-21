@@ -66,7 +66,7 @@ export async function loginUser(req: express.Request, res: express.Response) {
                 if (error) throw error;
                 const isMatch = await bcrypt.compare(password, result[0].password);
                 if (!isMatch) throw new Error("Email or password incorrect");
-                
+
                 const cookie = { userId: result[0].user_id };
                 const secret = process.env.JWT_SECRET;
                 if (!secret) throw new Error("Couldn't load secret from .env");
@@ -90,17 +90,19 @@ export async function getUserByCookie(req: express.Request, res: express.Respons
         if (!secret) throw new Error("Couldn't load secret from .env");
 
         const { userID } = req.cookies;
-        if (!userID) throw new Error("Couldn't receive / find cookie named userId");
 
-        const decodedUserId = jwt.decode(userID, secret);
-        const { userId } = decodedUserId;
+        if (userID) {
+            const decodedUserId = jwt.decode(userID, secret);
+            const { userId } = decodedUserId;
 
-        const sql = `SELECT * FROM users WHERE user_id = '${userId}'`;
-
-        connection.query(sql, (error, result) => {
-            if (error) throw error;
-            res.send({ result });
-        });
+            const sql = `SELECT * FROM users WHERE user_id = '${userId}'`;
+            connection.query(sql, (error, result) => {
+                if (error) throw error;
+                res.send({ result });
+            });
+        } else {
+            res.send({ result: { user: "guest" } });
+        }
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

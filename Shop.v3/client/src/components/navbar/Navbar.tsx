@@ -22,7 +22,7 @@ const Navbar = () => {
         <Link to="">הסל שלי</Link>
       </div>
       <div className="navbar__greet-user">
-        {!user && <p>שלום אורח</p>}
+        {!user  && <p>שלום אורח</p>}
         {user && <p>שלום {user.last_name} {user.first_name}</p>}
       </div>
       <div className="navbar__description">
