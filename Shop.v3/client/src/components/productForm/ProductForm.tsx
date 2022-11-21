@@ -25,6 +25,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     const handleAddToCart = (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
+            // TODO: 
+            // from event outputs
+            // get the id of the product
+            // add to cart the product_id and user_id as foreign keys
             if (storeType === "mac") {
                 const [productColor, productModel] = [event.target.elements.productColor.value, event.target.elements.productModel.value];
                 console.log(productColor, productModel);
