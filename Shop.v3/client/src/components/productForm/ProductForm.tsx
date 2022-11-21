@@ -1,4 +1,5 @@
-import React, { useEffect } from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { getUserByCookie } from "../../features/user/userAPI"
@@ -14,15 +15,21 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors }) => {
     const { storeType } = useParams();
     const { productName } = useParams();
-    
-    const user: User = useAppSelector(selectUser);
+    const [productId, setProductId] = useState<number | null>(null);
+
     const dispatch = useAppDispatch();
+    const user: User = useAppSelector(selectUser);
+    const userId = user.user_id;
 
     useEffect(() => {
         dispatch(getUserByCookie());
     }, []);
 
-    const handleAddToCart = (event: React.FC<HTMLFormElement> | any) => {
+    useEffect(() => {
+        addToCart();
+    }, [productId])
+
+    const handleAddToCart = async (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
             // TODO: 
@@ -30,19 +37,70 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
             // get the id of the product
             // add to cart the product_id and user_id as foreign keys
             if (storeType === "mac") {
-                const [productColor, productModel] = [event.target.elements.productColor.value, event.target.elements.productModel.value];
-                console.log(productColor, productModel);
+                if (productName !== "Mac Mini" && productName !== "Mac Pro" && productName !== "Mac Studio") {
+
+                    const [productColor, productModel] = [event.target.elements.productColor.value, event.target.elements.productModel.value];
+                    const { data } = await axios.post("/products/get-product-id", { productColor, productModel, storeType });
+                    if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                    const { prodId } = data;
+                    const {product_id} = prodId;
+                    setProductId(product_id);
+                } else {
+
+                    const productModel = event.target.elements.productModel.value;
+                    const { data } = await axios.post("/products/get-product-id", { productName, productModel, storeType });
+                    if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                    const { prodId } = data;
+                    const {product_id} = prodId;
+                    setProductId(product_id);
+                }
+
             } else if (storeType === "iphone" || storeType === "ipad" || storeType === "apple_tv") {
-                const [productColor, storage] = [event.target.elements.productColor.value, event.target.elements.storage.value];
-                console.log(productColor, storage);
+
+                const [productColor, productStorage] = [event.target.elements.productColor.value, event.target.elements.storage.value];
+                const { data } = await axios.post("/products/get-product-id", { productColor, productStorage, storeType, productName });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                const { prodId } = data;
+                const {product_id} = prodId;
+                    setProductId(product_id);
+
             } else if (storeType === "apple_watch") {
-                const [productColor, screenSize] = [event.target.elements.productColor.value, event.target.elements.screenSize.value];
-                console.log(productColor, screenSize);
+
+                const [productColor, productScreenSize] = [event.target.elements.productColor.value, event.target.elements.screenSize.value];
+                const { data } = await axios.post("/products/get-product-id", { productColor, productScreenSize, storeType, productName });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                const { prodId } = data;
+                const {product_id} = prodId;
+                    setProductId(product_id);
+
             } else if (storeType === "air_pods" && productName === "AirPods Max") {
+
                 const productColor = event.target.elements.productColor.value;
-                console.log(productColor);
+                const { data } = await axios.post("/products/get-product-id", { productColor, storeType, productName });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                const { prodId } = data;
+                const {product_id} = prodId;
+                    setProductId(product_id);
+
             } else {
-                console.log(productName);
+
+                const { data } = await axios.post("/products/get-product-id", { productName, storeType });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                const { prodId } = data;
+                const {product_id} = prodId;
+                    setProductId(product_id);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const addToCart = async () => {
+        try {
+            if (productId !== null) {
+                const { data } = await axios.post("/products/add-to-cart", { productId, userId });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/add-to-cart'");
+                console.log(data);
             }
 
         } catch (error) {
@@ -56,6 +114,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
 
         // TODO:
         // Render product img
+
         <form onSubmit={handleAddToCart}>
             {productInfo[0].storage !== null &&
                 productInfo.map((productStorage, idx) => {

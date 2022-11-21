@@ -62,3 +62,104 @@ export async function getProductColors(req: express.Request, res: express.Respon
         res.status(500).send({ error: error.message });
     }
 }
+
+export async function getProductId(req: express.Request, res: express.Response) {
+    try {
+        const { productColor, productModel, productStorage, productScreenSize, productName, storeType } = req.body;
+
+        if (storeType === "mac") {
+            if (productName !== "Mac Mini" && productName !== "Mac Pro" && productName !== "Mac Studio") {
+                const sql = `SELECT product_id FROM products WHERE color = '${productColor}' AND model = '${productModel}'`;
+                connection.query(sql, (error, result) => {
+                    try {
+                        if (error) throw error;
+                        const prodId = result[0];
+                        res.send({ prodId });
+                    } catch (error) {
+                        res.status(500).send({ error: error.message });
+                    }
+                });
+            } else {
+
+                const sql = `SELECT product_id FROM products WHERE name = '${productName}' AND model = '${productModel}' `;
+                connection.query(sql, (error, result) => {
+                    try {
+                        if (error) throw error;
+                        const prodId = result[0];
+                        res.send({ prodId });
+                    } catch (error) {
+                        res.status(500).send({ error: error.message });
+                    }
+                })
+            }
+        } else if (storeType === "iphone" || storeType === "ipad" || storeType === "apple_tv") {
+            const sql = `SELECT product_id FROM products WHERE color = '${productColor}' AND storage = '${productStorage}' AND name = '${productName}'`;
+            connection.query(sql, (error, result) => {
+                try {
+                    if (error) throw error;
+                    const prodId = result[0];
+                    res.send({ prodId });
+                } catch (error) {
+                    res.status(500).send({ error: error.message });
+                }
+            });
+        } else if (storeType === "apple_watch") {
+            const sql = `SELECT product_id FROM products WHERE color = '${productColor}' AND screen_size = '${productScreenSize}' and name = '${productName}'`;
+            connection.query(sql, (error, result) => {
+                try {
+                    if (error) throw error;
+                    const prodId = result[0];
+                    res.send({ prodId });
+                } catch (error) {
+                    res.status(500).send({ error: error.message });
+                }
+            });
+        } else if (storeType === "air_pods" && productName === "AirPods Max") {
+            try {
+                const sql = `SELECT product_id FROM products WHERE color = '${productColor}'`;
+                connection.query(sql, (error, result) => {
+                    try {
+                        if (error) throw error;
+                        const prodId = result[0];
+                        res.send({ prodId });
+                    } catch (error) {
+                        res.status(500).send({ error: error.message });
+                    }
+                });
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        } else {
+            const sql = `SELECT product_id FROM products WHERE name = '${productName}'`;
+            connection.query(sql, (error, result) => {
+                try {
+                    if (error) throw error;
+                    const prodId = result[0];
+                    res.send({ prodId });
+                } catch (error) {
+                    res.status(500).send({ error: error.message });
+                }
+            });
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function addToCart(req: express.Request, res: express.Response) {
+    try {
+        const { productId, userId } = req.body;
+        if (!productId || !userId) throw new Error("Couldn't receive productId or userId from req.body Ctrl: addToCart");
+        const sql = `INSERT INTO cart(user_id, product_id) VALUES('${userId}', '${productId}')`;
+        connection.query(sql, (error, result) => {
+            try {
+                if (error) throw error;
+                res.send({msg: "product was added"});
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
