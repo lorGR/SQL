@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Storenav = () => {
   return (
-    <div>
+    <div className="storenav">
         <Link to="/store/mac">Mac</Link>
         <Link to="/store/iphone">iPhone</Link>
         <Link to="/store/ipad">iPad</Link>

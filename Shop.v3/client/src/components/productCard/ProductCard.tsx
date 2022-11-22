@@ -28,12 +28,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }, [product]);
 
     return (
-        <div>
-            <h2>{productName}</h2>
-            <p>מחיר {product.price} ₪</p>
-            <p>מחיר באילת {product.price_eilat} ₪</p>
-            <figure>
-                <img src={productImage} alt={productName} />
+        <div className="product-card">
+            <h2 className="product-card__name">{productName}</h2>
+            <p className="product-card__price">מחיר: החל מ- <span className="product-card__price__number">{product.price} ₪</span></p>
+            <p className="product-card__price-eilat">מחיר אילת: החל מ- <span className="product-card__price-eilat__number">{product.price_eilat} ₪</span></p>
+            <figure className="product-card__figure">
+                <img className="product-card__figure__image" src={productImage} alt={productName} />
             </figure>
         </div>
     )

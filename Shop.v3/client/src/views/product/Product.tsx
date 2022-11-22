@@ -32,7 +32,7 @@ const Product = () => {
 
     useEffect(() => {
         const allCookies = document.cookie;
-        if(allCookies.length > 0) {
+        if (allCookies.length > 0) {
             dispatch(getUserByCookie());
         }
     }, [])
@@ -68,9 +68,11 @@ const Product = () => {
     }, [])
 
     return (
-        <div>
-            <h1>{productName}</h1>
-            {productInfo !== undefined && <p>החל מ- {productInfo[0].price}</p>}
+        <div className="product">
+            {/* // TODO: */}
+            {/* // Render a product header image */}
+            <h1 className="product__title">{productName}</h1>
+            {productInfo !== undefined && <p className="product__early-price">החל מ- {productInfo[0].price}</p>}
             {productInfo !== undefined && productColors !== undefined &&
                 <ProductForm productInfo={productInfo} productColors={productColors} />}
         </div>

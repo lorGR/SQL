@@ -49,7 +49,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     const { data } = await axios.post("/products/get-product-id", { productColor, productModel, storeType });
                     if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                     const { prodId } = data;
-                    const {product_id} = prodId;
+                    const { product_id } = prodId;
                     setProductId(product_id);
                 } else {
 
@@ -57,7 +57,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     const { data } = await axios.post("/products/get-product-id", { productName, productModel, storeType });
                     if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                     const { prodId } = data;
-                    const {product_id} = prodId;
+                    const { product_id } = prodId;
                     setProductId(product_id);
                 }
 
@@ -67,8 +67,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 const { data } = await axios.post("/products/get-product-id", { productColor, productStorage, storeType, productName });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                 const { prodId } = data;
-                const {product_id} = prodId;
-                    setProductId(product_id);
+                const { product_id } = prodId;
+                setProductId(product_id);
 
             } else if (storeType === "apple_watch") {
 
@@ -76,8 +76,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 const { data } = await axios.post("/products/get-product-id", { productColor, productScreenSize, storeType, productName });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                 const { prodId } = data;
-                const {product_id} = prodId;
-                    setProductId(product_id);
+                const { product_id } = prodId;
+                setProductId(product_id);
 
             } else if (storeType === "air_pods" && productName === "AirPods Max") {
 
@@ -85,16 +85,16 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 const { data } = await axios.post("/products/get-product-id", { productColor, storeType, productName });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                 const { prodId } = data;
-                const {product_id} = prodId;
-                    setProductId(product_id);
+                const { product_id } = prodId;
+                setProductId(product_id);
 
             } else {
 
                 const { data } = await axios.post("/products/get-product-id", { productName, storeType });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
                 const { prodId } = data;
-                const {product_id} = prodId;
-                    setProductId(product_id);
+                const { product_id } = prodId;
+                setProductId(product_id);
             }
         } catch (error) {
             console.error(error);
@@ -117,14 +117,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     const getProductPreviewImg = async () => {
         try {
             const { data } = await axios.post("/products/get-product-preview-img", { productName });
-            if(!data) throw new Error("Couldn't receive data from axios POST '/get-product-preview-img'");
+            if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-preview-img'");
             const { result } = data;
             const { preview_img } = result[0];
             setProductImg(preview_img);
         } catch (error) {
             console.error(error);
         }
-    } 
+    }
 
     const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
@@ -136,26 +136,21 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
         }
     }
     return (
-        
-        
-        <div>
-            {/* // TODO: */}
-            {/* // Render a product header image */}
-    
-            {/* // TODO: */}
-            {/* // Render product img */}
-            <figure>
-                <img src={productImg} alt={productName}/>
+
+
+        <div className="product-form">
+            <figure className="product-form__figure">
+                <img className="product-form__figure__image" src={productImg} alt={productName} />
             </figure>
-            <form onSubmit={handleAddToCart}>
+            <form className="product-form__form" onSubmit={handleAddToCart}>
                 {productInfo[0].storage !== null &&
                     productInfo.map((productStorage, idx) => {
                         return (
-                            <div key={idx}>
+                            <div className="product-form__form__storage" key={idx}>
                                 <label htmlFor={productStorage.storage!} >{productStorage.storage}</label>
                                 <input type="radio" name="storage" id={productStorage.storage!} value={productStorage.storage!} required />
-                                <p>מחיר {productStorage.price} ₪</p>
-                                <p>מחיר באילת {productStorage.price_eilat} ₪</p>
+                                <p className="product-form__form__price">מחיר {productStorage.price} ₪</p>
+                                <p className="product-form__form__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
                             </div>
                         );
                     })
@@ -164,11 +159,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     storeType !== 'mac' &&
                     productInfo.map((productScreenSize, idx) => {
                         return (
-                            <div key={idx}>
+                            <div className="product-form__form__screen-size" key={idx}>
                                 <label htmlFor={productScreenSize.screen_size!}>{productScreenSize.screen_size}</label>
                                 <input type="radio" name="screenSize" id={productScreenSize.screen_size!} required value={productScreenSize.screen_size!} />
-                                <p>מחיר {productScreenSize.price} ₪</p>
-                                <p>מחיר באילת {productScreenSize.price_eilat} ₪</p>
+                                <p className="product-form__form__price">מחיר {productScreenSize.price} ₪</p>
+                                <p className="product-form__form__price-eilat">מחיר באילת {productScreenSize.price_eilat} ₪</p>
                             </div>
                         );
                     })
@@ -178,7 +173,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                         // TODO :
                         // on change color change the image above
                         return (
-                            <div key={idx}>
+                            <div className="product-form__form__color" key={idx}>
                                 <label htmlFor={productColor.color}>{productColor.color}</label>
                                 <input onChange={handleChangeColor} type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
                             </div>
@@ -188,21 +183,28 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 {productInfo[0].model !== null &&
                     productInfo.map((productModel, idx) => {
                         return (
-                            <div key={idx}>
+                            <div className="product-form__form__model" key={idx}>
                                 <label htmlFor={productModel.model!}>{productModel.model}</label>
                                 <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
-                                <p>מחיר {productModel.price} ₪</p>
-                                <p>מחיר באילת {productModel.price_eilat} ₪</p>
+                                <p className="product-form__form__price">מחיר {productModel.price} ₪</p>
+                                <p className="product-form__form__price-eilat">מחיר באילת {productModel.price_eilat} ₪</p>
                             </div>
                         );
                     })
                 }
                 {/* // TODO: */}
                 {/* // Display the amount of money next to button */}
-                {user && <button>הוסף לסל</button>}
+
+                {/* // TODO: */}
+                {/* // Add bottom nav bar with button add to cart which will be scrollable (fixed to bottom) */}
+                {user &&
+                    <div className="product-form__add-to-cart">
+                        <button className="product-form__add-to-cart-btn">הוסף לסל</button>
+                    </div>
+                }
                 {!user &&
-                    <div>
-                        <button disabled>הוסף לסל </button>
+                    <div className="product-form__add-to-cart">
+                        <button className="product-form__add-to-cart-btn" disabled>הוסף לסל </button>
                         <p>עלייך להירשם או להתחבר בכדי להוסיף מוצר זה לסל הקניות</p>
                     </div>
                 }

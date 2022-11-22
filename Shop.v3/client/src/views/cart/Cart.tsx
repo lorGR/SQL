@@ -66,10 +66,10 @@ const Cart = () => {
     // Create Component of CartProduct
 
     return (
-        <div>
-            <h1>סל הקניות</h1>
+        <div className="cart">
+            <h1 className="cart__title">סל הקניות</h1>
             {!user &&
-                <p>
+                <p className="cart__user-information">
                     <Link to="/my-account/registration">הירשם</Link>/
                     <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך
                 </p>}

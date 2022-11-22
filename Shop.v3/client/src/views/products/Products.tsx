@@ -34,11 +34,12 @@ const Products = () => {
     }, [storeType]);
     
     return (
-        <div>
-            {storeType}
+        <div className="products">
+            {/* TODO: make the title not upper case and remove underscore if there is */}
+            <h2 className="products__title">{storeType?.toUpperCase()}</h2>
             {storeProducts?.map((product, idx) => {
                 return (
-                    <Link to={product.name} key={idx}>
+                    <Link className="products__product" to={product.name} key={idx}>
                         <ProductCard product={product} />
                     </Link>
                 );
