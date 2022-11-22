@@ -14,10 +14,7 @@ const Products = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const allCookies = document.cookie;
-        if(allCookies.length > 0) {
-            dispatch(getUserByCookie());
-        }
+        dispatch(getUserByCookie());
     }, [])
 
     async function getProductsByType(storeType: string) {
@@ -35,14 +32,14 @@ const Products = () => {
     useEffect(() => {
         storeType !== undefined && getProductsByType(storeType);
     }, [storeType]);
-
+    
     return (
         <div>
             {storeType}
             {storeProducts?.map((product, idx) => {
                 return (
                     <Link to={product.name} key={idx}>
-                        <ProductCard productName={product.name} />
+                        <ProductCard product={product} />
                     </Link>
                 );
             })}

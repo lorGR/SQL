@@ -172,12 +172,32 @@ export async function getUserProducts(req: express.Request, res: express.Respons
         const sql = `SELECT * FROM products WHERE product_id IN (SELECT product_id FROM cart WHERE user_id = '${userId}')`;
         connection.query(sql, (error, result) => {
             try {
-                if(error) throw error;
+                if (error) throw error;
                 res.send(result);
-            } catch (error) {   
+            } catch (error) {
                 res.status(500).send({ error: error.message });
             }
         });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function getProductPreviewImg(req: express.Request, res: express.Response) {
+    try {
+        const { productName } = req.body;
+        if (!productName) throw new Error("Couldn't receive produceName from req.body Ctrl getProductPreviewImg ");
+
+        const sql = `SELECT preview_img FROM products WHERE name = '${productName}' LIMIT 1`;
+
+        connection.query(sql, (error, result) => {
+            try {
+                if(error) throw error;
+                res.send({result});
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

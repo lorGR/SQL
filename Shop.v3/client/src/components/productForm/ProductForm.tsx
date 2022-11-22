@@ -29,7 +29,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     useEffect(() => {
         addToCart();
     }, [productId])
-    console.log(productInfo);
+    
     const handleAddToCart = async (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
