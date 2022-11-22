@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
+import CartProductCard from "../../components/cartProductCard/CartProductCard";
 import { getUserByCookie } from "../../features/user/userAPI";
 import { selectUser } from "../../features/user/userSlice"
 
@@ -28,25 +29,12 @@ const Cart = () => {
     const [userProducts, setUserProducts] = useState<CartProduct[]>();
     const [productsPrice, setProductsPrice] = useState<any>();
 
-    const handleRemoveFromCart = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | any) => {
-        try {
-            const productId = event.target.id;
-            const userId = user.user_id;
-            const { data } = await axios.delete("/products/delete-product-from-cart", { data: { userId, productId } });
-            if (!data) throw new Error("Couldn't receive data from axios DELETE '/delete-product-from-cart'");
-
-            window.location.reload();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     const getUserProducts = async () => {
         try {
-            if(user) {
+            if (user) {
                 const userId = user.user_id;
-                const { data } = await axios.post("/products/get-products-price-cart", {userId});
-                if(!data) throw new Error("Couldn't receive data from axios POST '/get-products-price-cart'");
+                const { data } = await axios.post("/products/get-products-price-cart", { userId });
+                if (!data) throw new Error("Couldn't receive data from axios POST '/get-products-price-cart'");
                 const sum = data?.reduce((accumulator: any, object: any) => {
                     return accumulator + object.price;
                 }, 0);
@@ -62,40 +50,30 @@ const Cart = () => {
         getUserProducts();
     }, [user]);
 
-    // TODO: 
-    // Create Component of CartProduct
-
     return (
         <div className="cart">
             <h1 className="cart__title">סל הקניות</h1>
             {!user &&
-                <p className="cart__user-information">
+                <p className="cart__no-user-information">
                     <Link to="/my-account/registration">הירשם</Link>/
                     <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך
                 </p>}
             {!userProducts &&
-                <p>אין מוצרים בסל קניות</p>
+                <p className="cart__user-information">אין מוצרים בסל קניות</p>
             }
             {userProducts &&
                 userProducts.map(userProduct => {
                     const productId = userProduct.product_id.toString();
                     return (
-                        <div key={userProduct.product_id}>
-                            <h4>{userProduct.name}</h4>
-                            <figure>
-                                <img src={userProduct.display_img} alt={userProduct.name} />
-                            </figure>
-                            <p>מחיר {userProduct.price} ₪</p>
-                            <button onClick={handleRemoveFromCart} id={productId} >הסר מוצר</button>
-                        </div>
+                        <CartProductCard product={userProduct} key={userProduct.product_id}/>
                     );
                 })
             }
             {userProducts &&
-                <div>
-                    <form>
-                        <p>סה״כ לתשלום: {productsPrice} ₪</p>
-                        <button>קנה עכשיו</button>
+                <div className="cart__purchase">
+                    <form className="cart__purchase__form">
+                        <p className="cart__purchase__form__price">סה״כ לתשלום: {productsPrice} ₪</p>
+                        <button className="cart__purchase__form__btn">קנה עכשיו</button>
                     </form>
                 </div>
             }

@@ -31,23 +31,23 @@ const MyAccount = () => {
 
     return (
         <div className="my-account">
-            <h1>אזור אישי</h1>
+            <h1 className="my-account__title">אזור אישי</h1>
             <div className="my-account__container">
                 <div className="my-account__new-user">
-                    <h2>לקוח חדש</h2>
-                    <p>על ידי יצירת חשבון לקוח באתר שלנו באפשרותך לעבור תהליך רכישה מהיר</p>
-                    <p>שירות לקוחות ותמיכה טכנית</p>
-                    <p>03-9005355</p>
+                    <h2 className="my-account__new-user__title">לקוח חדש</h2>
+                    <p className="my-account__new-user__info">על ידי יצירת חשבון לקוח באתר שלנו באפשרותך לעבור תהליך רכישה מהיר</p>
+                    <p className="my-account__new-user__support-info">שירות לקוחות ותמיכה טכנית</p>
+                    <p className="my-account__new-user__support-tel">03-9005355</p>
                     <Link to="/my-account/registration">צור חשבון</Link>
                 </div>
                 <div className="my-account__login-user">
-                    <h2>לקוח חוזר</h2>
-                    <p>אם כבר יש לך חשבון לקוח בחנות שלנו הנך מוזמן להתחבר</p>
-                    {/* create component of login */}
-                    <form onSubmit={handleLogin}>
-                        <input type="email" name="email" id="email" placeholder="דוא״ל" />
-                        <input type="password" name="password" id="password" placeholder="סיסמה" autoComplete="false" />
-                        <button>התחבר</button>
+                    <h2 className="my-account__login-user__title">לקוח חוזר</h2>
+                    <p className="my-account__login-user__info">אם כבר יש לך חשבון לקוח בחנות שלנו הנך מוזמן להתחבר</p>
+                    {/* TODO: create component of login */}
+                    <form className="my-account__login-user__form" onSubmit={handleLogin}>
+                        <input className="my-account__login-user__form__input" type="email" name="email" id="email" placeholder="דוא״ל" />
+                        <input className="my-account__login-user__form__input" type="password" name="password" id="password" placeholder="סיסמה" autoComplete="false" />
+                        <button className="my-account__login-user__form__btn">התחבר</button>
                     </form>
                 </div>
             </div>
