@@ -1,11 +1,3 @@
-// This is the logic to get the products of a user that were added to cart
-// SELECT *
-// FROM products
-// WHERE product_id IN (
-// 	SELECT product_id FROM cart 
-// 	WHERE user_id = 'userId'
-// );
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -38,7 +30,8 @@ const Cart = () => {
     useEffect(() => {
         getUserProducts();
     }, []);
-
+    // TODO: 
+    // Render products
     return (
         <div>
             <h1>סל הקניות</h1>

@@ -13,7 +13,9 @@ export interface ProductInfo {
     price: number,
     price_eilat: number,
     screen_size: string | null,
-    storage: string | null
+    storage: string | null,
+    previewImg: string | null,
+    displayImg: string | null
 }
 
 export interface ProductColors {
