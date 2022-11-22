@@ -15,7 +15,9 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors }) => {
     const { storeType } = useParams();
     const { productName } = useParams();
+
     const [productId, setProductId] = useState<number | null>(null);
+    const [productImg, setProductImg] = useState<string>();
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -24,12 +26,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
 
     useEffect(() => {
         dispatch(getUserByCookie());
+        getProductPreviewImg()
     }, []);
 
     useEffect(() => {
         addToCart();
-    }, [productId])
-    
+    }, [productId]);
+
+    // console.log(productColors);
+
     const handleAddToCart = async (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
@@ -109,6 +114,27 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
         }
     }
 
+    const getProductPreviewImg = async () => {
+        try {
+            const { data } = await axios.post("/products/get-product-preview-img", { productName });
+            if(!data) throw new Error("Couldn't receive data from axios POST '/get-product-preview-img'");
+            const { result } = data;
+            const { preview_img } = result[0];
+            setProductImg(preview_img);
+        } catch (error) {
+            console.error(error);
+        }
+    } 
+
+    const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const colorObject = productColors.filter(product => product.color === event.target.value);
+            const { display_img } = colorObject[0];
+            setProductImg(display_img);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     return (
         
         
@@ -119,7 +145,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
             {/* // TODO: */}
             {/* // Render product img */}
             <figure>
-                <img src="" alt="" />
+                <img src={productImg} alt={productName}/>
             </figure>
             <form onSubmit={handleAddToCart}>
                 {productInfo[0].storage !== null &&
@@ -154,7 +180,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                         return (
                             <div key={idx}>
                                 <label htmlFor={productColor.color}>{productColor.color}</label>
-                                <input type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
+                                <input onChange={handleChangeColor} type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
                             </div>
                         );
                     })

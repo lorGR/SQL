@@ -20,6 +20,7 @@ export interface ProductInfo {
 
 export interface ProductColors {
     color: string
+    display_img: string
 }
 
 const Product = () => {

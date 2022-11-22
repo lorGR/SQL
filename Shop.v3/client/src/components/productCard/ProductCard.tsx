@@ -17,7 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             if (!data) throw new Error("Coiuldn't receive data from axios POST '/get-product-preview-img'");
             const { result } = data;
             const { preview_img } = result[0];
-            setProductImage(preview_img);       
+            setProductImage(preview_img);
         } catch (error) {
             console.error(error);
         }
@@ -25,14 +25,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     useEffect(() => {
         getProductPreviewImg();
-    }, []);
+    }, [product]);
 
     return (
         <div>
             <h2>{productName}</h2>
             <p>מחיר {product.price} ₪</p>
             <p>מחיר באילת {product.price_eilat} ₪</p>
-            <img src={productImage} alt={productName} />
+            <figure>
+                <img src={productImage} alt={productName} />
+            </figure>
         </div>
     )
 }
