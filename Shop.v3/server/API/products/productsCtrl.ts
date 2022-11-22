@@ -34,7 +34,7 @@ export async function getProductInfo(req: express.Request, res: express.Response
             try {
                 if (error) throw error;
                 res.send({ result });
-                
+
             } catch (error) {
                 res.status(500).send({ error: error.message });
             }
@@ -193,12 +193,51 @@ export async function getProductPreviewImg(req: express.Request, res: express.Re
 
         connection.query(sql, (error, result) => {
             try {
-                if(error) throw error;
-                res.send({result});
+                if (error) throw error;
+                res.send({ result });
             } catch (error) {
                 res.status(500).send({ error: error.message });
             }
         })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function deleteProductFromCart(req: express.Request, res: express.Response) {
+    try {
+        const { userId, productId } = req.body;
+        if (!userId || !productId) throw new Error("Couldn't receive userId or productId from req.body Ctrl deleteProductFromCart");
+
+        const sql = `DELETE FROM cart WHERE product_id = '${productId}' AND user_id = '${userId}'`;
+
+        connection.query(sql, (error, result) => {
+            try {
+                if (error) throw error;
+                res.send({ result });
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function getProductsPrice(req: express.Request, res: express.Response) {
+    try {
+        const { userId } = req.body;
+        if (!userId) throw new Error("Couldn't receive userId from req.body Ctrl: getUserProducts");
+
+        const sql = `SELECT * FROM products WHERE product_id IN (SELECT product_id FROM cart WHERE user_id = '${userId}')`;
+        connection.query(sql, (error, result) => {
+            try {
+                if (error) throw error;
+                res.send(result);
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        });
     } catch (error) {
         res.status(500).send({ error: error.message });
     }
