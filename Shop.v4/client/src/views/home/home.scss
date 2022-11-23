@@ -1,0 +1,176 @@
+.home {
+    min-height: 100vh;
+    text-align: center;
+
+    .slider {
+        width: 100%;
+        box-shadow: 0px 2px 2px 0px rgba(219, 219, 219, 1);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &__support {
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        &__info {
+            text-decoration: underline;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: var(--light-blue);
+        }
+    }
+
+
+
+    .commercials {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+
+        a {
+            width: 50%;
+            color: var(--full-white);
+            text-decoration: none;
+
+            .commercial-card {
+                display: flex;
+                justify-content: space-around;
+                background-color: var(--dark-gray);
+                text-align: right;
+
+                &__info {
+                    width: 50%;
+                    padding: 3rem 2rem;
+
+                    &__information {
+                        &__title {
+                            font-size: 2.5rem;
+                            font-weight: 400;
+                            margin-bottom: 1rem;
+                        }
+
+                        &__subtitle {
+                            font-size: 2rem;
+                            font-weight: 300;
+                        }
+                    }
+
+                    &__btn-container {
+                        margin-top: 8rem;
+
+                        &__btn {
+                            padding: 1rem 2rem;
+                            font-size: 1.25rem;
+                            border: none;
+                            color: var(--full-white);
+                            background-color: var(--dark-gray);
+                            border: 1px solid var(--full-white);
+                            border-radius: .25rem;
+                            transition: all .3s ease-in-out;
+                        }
+                    }
+                }
+
+                &__display {
+                    &__figure {
+                        &__image {
+                            width: 100%;
+                            transition: all .5s ease-in-out;
+                        }
+                    }
+                }
+            }
+        }
+
+        a:hover {
+            .commercial-card__info__btn-container__btn {
+                color: black;
+                background-color: var(--light-blue);
+                border: 1px solid var(--light-blue);
+            }
+
+            .commercial-card__display__figure__image {
+                scale: 105%;
+            }
+        }
+    }
+
+
+    .special-offers {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row: auto auto;
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+        
+        a {
+            transition: outline .1s linear;
+            transition: border .001 linear;
+            border: 1px solid var(--light-gray);
+            text-decoration: none;
+            color: var(--full-black);
+            .special-offer-card {
+                display: flex;
+                justify-content: space-around;
+                padding: 1rem;
+
+                &__context {
+                    padding: 2rem 2rem;
+                    text-align: right;
+                    &__title {
+                        width: 70%;
+                        font-size: 2rem;
+                        font-weight: 500;
+                        margin-bottom: 1rem;
+                    }
+                    &__subtext {
+                        width: 70%;
+                        font-size: 1.2rem;
+                        color: var(--dark-gray);
+                        margin-bottom: 2rem;
+                    }
+                    &__btn-container{
+                        &__btn {
+                            padding: .5rem 2.5rem ;
+                            border: none;
+                            color: var(--full-white);
+                            background: var(--drak-gray-to-light-gray-gradient);
+                            border-radius: .25rem;
+                            font-size: 1.25rem;
+                            transition: background .3s ease-in-out;
+                            transition: color .4s ease-in-out;
+                        }
+                    }
+                }
+
+                &__display {
+                    &__figure {
+                        &__image {
+                            transition: all .5s ease-in-out;
+                            width: 100%;
+                        }
+                    }
+                }
+
+            }
+        }
+        a:hover {
+            outline: 3px solid var(--light-blue);
+            border: 1px solid var(--light-blue);
+            .special-offer-card__display__figure__image{
+                scale: 105%;
+            }
+            .special-offer-card__context__btn-container__btn {
+                background: var(--light-blue);
+                color: var(--full-black);
+            }
+        }
+    }
+}
