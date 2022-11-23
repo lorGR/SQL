@@ -5,6 +5,9 @@ import { getUserByCookie } from "../../features/user/userAPI";
 import { User } from "../../features/user/userModel";
 import { selectUser, UserState } from "../../features/user/userSlice";
 
+import cartIcon from "../../assets/svg/navbar/cartIcon.svg";
+import myAccountIcon from "../../assets/svg/navbar/myAccountIcon.svg";
+
 const Navbar = () => {
 
   const dispatch = useAppDispatch();
@@ -13,26 +16,45 @@ const Navbar = () => {
   useEffect(() => {
     dispatch(getUserByCookie());
   }, []);
-  
+
   return (
     <nav className="navbar">
-      
+
       <div className="navbar__store-presentation">
         <Link to="/">
-          <div className="nav__store-presentation__images">
+          <div className="navbar__store-presentation__images">
             <img src="https://www.idigital.co.il/SVTemplate/img/general_new/premium_new.png" alt="apple premium reseller" />
             <img src="https://www.idigital.co.il/SVTemplate/img/general/iDigital.png" alt="store logo idigital" />
           </div>
         </Link>
       </div>
       <div className="navbar__greet-user">
-        {!user  && <p>שלום אורח</p>}
-        {user && <p>שלום {user.last_name} {user.first_name}</p>}
+        {!user &&
+          <div className="navbar__greet-user__container">
+            <p>שלום אורח</p>
+          </div>
+        }
+        {user &&
+          <div className="navbar__greet-user__container">
+            <p>שלום</p>
+            <p>{user.first_name} {user.last_name}</p>
+          </div>
+        }
       </div>
       <div className="navbar__menu">
         {/* <Link to="">חיפוש</Link> */}
-        <Link to="/my-account">החשבון שלי</Link>
-        <Link to="/cart">הסל שלי</Link>
+        <Link className="navbar__menu__item" to="/my-account">
+          <div className="navbar__menu__item__container">
+            <img src={myAccountIcon} alt="my account icon" />
+            <p>החשבון שלי</p>
+          </div>
+        </Link>
+        <Link className="navbar__menu__item" to="/cart">
+          <div className="navbar__menu__item__container">
+            <img src={cartIcon} alt="cart icon" />
+            <p>הסל שלי</p>
+          </div>
+        </Link>
       </div>
     </nav>
   )

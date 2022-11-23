@@ -16,7 +16,7 @@ const Main = () => {
     // },[]);
 
     return (
-        <div>
+        <div className="main">
             <Navbar />
             <Storenav />
             <Outlet />
