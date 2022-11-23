@@ -67,7 +67,6 @@ export async function getProductColors(req: express.Request, res: express.Respon
 export async function getProductId(req: express.Request, res: express.Response) {
     try {
         const { productColor, productModel, productStorage, productScreenSize, productName, storeType } = req.body;
-
         if (storeType === "mac") {
             if (productName !== "Mac Mini" && productName !== "Mac Pro" && productName !== "Mac Studio") {
                 const sql = `SELECT product_id FROM products WHERE color = '${productColor}' AND model = '${productModel}'`;
@@ -117,7 +116,8 @@ export async function getProductId(req: express.Request, res: express.Response) 
             });
         } else if (storeType === "air_pods" && productName === "AirPods Max") {
             try {
-                const sql = `SELECT product_id FROM products WHERE color = '${productColor}'`;
+                console.log(productName);
+                const sql = `SELECT product_id FROM products WHERE color = '${productColor}' AND name = '${productName}'`;
                 connection.query(sql, (error, result) => {
                     try {
                         if (error) throw error;

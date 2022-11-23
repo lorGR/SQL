@@ -82,8 +82,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
             } else if (storeType === "air_pods" && productName === "AirPods Max") {
 
                 const productColor = event.target.elements.productColor.value;
+                console.log({productColor, storeType, productName});
                 const { data } = await axios.post("/products/get-product-id", { productColor, storeType, productName });
                 if (!data) throw new Error("Couldn't receive data from axios POST '/get-product-id'");
+                console.log(data);
                 const { prodId } = data;
                 const { product_id } = prodId;
                 setProductId(product_id);
