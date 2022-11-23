@@ -153,8 +153,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                                     <label className="product-form__form__storage-container__storage__label" htmlFor={productStorage.storage!} >
                                         <div className="product-form__form__storage-container__storage__label__box">
                                             <p className="product-form__form__storage-container__storage__label__box__text">{productStorage.storage}</p>
-                                            <p className="product-form__form__storage-container__storage__label__box__price">מחיר {productStorage.price} ₪</p>
-                                            <p className="product-form__form__storage-container__storage__label__box__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
+                                            <p className="product-form__form__storage-container__storage__label__box__price">{productStorage.price} ₪</p>
+                                            <p className="product-form__form__storage-container__storage__label__box__price-eilat"> באילת: {productStorage.price_eilat} ₪</p>
                                         </div>
                                     </label>
                                 </div>
@@ -168,11 +168,15 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     <div className="product-form__form__screen-size-container">
                         {productInfo.map((productScreenSize, idx) => {
                             return (
-                                <div className="product-form__form__screen-size-container_screen-size" key={idx}>
-                                    <label htmlFor={productScreenSize.screen_size!}>{productScreenSize.screen_size}</label>
-                                    <input type="radio" name="screenSize" id={productScreenSize.screen_size!} required value={productScreenSize.screen_size!} />
-                                    <p className="product-form__form__price">מחיר {productScreenSize.price} ₪</p>
-                                    <p className="product-form__form__price-eilat">מחיר באילת {productScreenSize.price_eilat} ₪</p>
+                                <div className="product-form__form__screen-size-container__screen-size" key={idx}>
+                                    <input className="screen-size-input" type="radio" name="screenSize" id={productScreenSize.screen_size!} required value={productScreenSize.screen_size!} />
+                                    <label className="product-form__form__screen-size-container__screen-size__label" htmlFor={productScreenSize.screen_size!}>
+                                        <div className="product-form__form__screen-size-container__screen-size__label__box">
+                                            <p className="product-form__form__screen-size-container__screen-size__label__box__text">{productScreenSize.screen_size} <span className="product-form__form__screen-size-container__screen-size__label__box__text__span">מ״מ </span></p>
+                                            <p className="product-form__form__screen-size-container__screen-size__label__box__price">{productScreenSize.price} ₪</p>
+                                            <p className="product-form__form__screen-size-container__screen-size__label__box__price-eilat">באילת: {productScreenSize.price_eilat}</p>
+                                        </div>
+                                    </label>
                                 </div>
                             );
                         })}
