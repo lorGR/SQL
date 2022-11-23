@@ -149,10 +149,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                         {productInfo.map((productStorage, idx) => {
                             return (
                                 <div className="product-form__form__storage-container__storage" key={idx}>
-                                    <label htmlFor={productStorage.storage!} >{productStorage.storage}</label>
-                                    <input type="radio" name="storage" id={productStorage.storage!} value={productStorage.storage!} required />
-                                    <p className="product-form__form__price">מחיר {productStorage.price} ₪</p>
-                                    <p className="product-form__form__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
+                                    <input className="storage-input" type="radio" name="storage" id={productStorage.storage!} value={productStorage.storage!} required />
+                                    <label className="product-form__form__storage-container__storage__label" htmlFor={productStorage.storage!} >
+                                        <div className="product-form__form__storage-container__storage__label__box">
+                                            <p className="product-form__form__storage-container__storage__label__box__text">{productStorage.storage}</p>
+                                            <p className="product-form__form__storage-container__storage__label__box__price">מחיר {productStorage.price} ₪</p>
+                                            <p className="product-form__form__storage-container__storage__label__box__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
+                                        </div>
+                                    </label>
                                 </div>
                             );
                         })}
@@ -181,11 +185,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                             return (
                                 <div className="product-form__form__color-container__color" key={idx}>
                                     <input className="color-input" onChange={handleChangeColor} type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
-                                        <label className="product-form__form__color-container__color__label" htmlFor={productColor.color}>
-                                            <div className={`${productColor.color.toLowerCase()} product-form__form__color-container__color__label__box`}>
-                                                {productColor.color}
-                                            </div>
-                                        </label>
+                                    <label className="product-form__form__color-container__color__label" htmlFor={productColor.color}>
+                                        <div className={`${productColor.color.toLowerCase()} product-form__form__color-container__color__label__box`}>
+                                            {productColor.color}
+                                        </div>
+                                    </label>
                                 </div>
                             );
                         })}
@@ -197,10 +201,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                         {productInfo.map((productModel, idx) => {
                             return (
                                 <div className="product-form__form__model-container__model" key={idx}>
-                                    <label htmlFor={productModel.model!}>{productModel.model}</label>
-                                    <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
-                                    <p className="product-form__form__price">מחיר {productModel.price} ₪</p>
-                                    <p className="product-form__form__price-eilat">מחיר באילת {productModel.price_eilat} ₪</p>
+                                    <input className="model-input" type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
+                                    <label className="product-form__form__model-container__model__label" htmlFor={productModel.model!}>
+                                        <div className="product-form__form__model-container__model__label__box">
+                                            <p className="product-form__form__model-container__model__label__box__text">{productModel.model}</p>
+                                            <p className="product-form__form__model-container__model__label__box__price">מחיר {productModel.price} ₪</p>
+                                            <p className="product-form__form__model-container__model__label__box__price-eilat">מחיר באילת {productModel.price_eilat} ₪</p>
+                                        </div>
+                                    </label>
                                 </div>
                             );
                         })}
@@ -213,12 +221,12 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 {/* // Add bottom nav bar with button add to cart which will be scrollable (fixed to bottom) */}
                 {user &&
                     <div className="product-form__add-to-cart">
-                        <button className="product-form__add-to-cart-btn">הוסף לסל</button>
+                        <button className="product-form__add-to-cart__btn">הוסף לסל</button>
                     </div>
                 }
                 {!user &&
                     <div className="product-form__add-to-cart">
-                        <button className="product-form__add-to-cart-btn" disabled>הוסף לסל </button>
+                        <button className="product-form__add-to-cart__btn" disabled>הוסף לסל </button>
                         <p>עלייך להירשם או להתחבר בכדי להוסיף מוצר זה לסל הקניות</p>
                     </div>
                 }

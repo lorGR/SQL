@@ -1,4 +1,5 @@
 .product {
+    margin-top: 1rem;
     &__title {
         background-color: var(--medium-gray);
         font-weight: 400;
@@ -15,7 +16,7 @@
     margin-top: 4rem;
 
     &__figure {
-        width: 40%;
+        width: 30%;
         order: 1;
 
         &__image {
@@ -26,8 +27,9 @@
     &__form {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-
+        gap: 2rem;
+        width: 50%;
+        height: 100%;
         &__color-title {
             font-size: 2rem;
         }
@@ -53,9 +55,6 @@
             gap: 1rem;
 
             &__color {
-                // width: 4rem;
-                // height: 4rem;
-                position: relative;
                 display: flex;
 
                 &__label {
@@ -74,18 +73,68 @@
                         font-size: .8rem;
                     }
                 }
+                &__label:hover {
+                    border: 2px solid var(--light-blue);
+                }
 
             }
+        }
+        &__model-container {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            &__model {
+                display: flex;
+                &__label {
+                    padding: 1rem;
+                    text-align: center;
+                    border: 3px solid var(--medium-gray);
+                    cursor: pointer;
+                    transition: all .2s ease-in;
+                }
+                &__label:hover {
+                    border: 3px solid var(--light-blue);
+                }
+            }
+        }
+        &__storage-container {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            &__storage {
+                
+            }
+        }
+    }
+    &__add-to-cart {
+        &__btn {
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            background: var(--drak-gray-to-light-gray-gradient);
+            color: var(--full-white);
+            border-radius: .25rem;
+            cursor: pointer;
+            transition: background .3s ease-in-out;
+            transition: color .4s ease-in-out;
+        }
+        &__btn:hover {
+            background: var(--light-blue);
+            color: var(--black);
         }
     }
 }
 
-.color-input {
+.color-input, .model-input, .storage-input {
     display: none;
 }
 
-input[type=radio]:checked + .product-form__form__color-container__color__label {
+.color-input:checked + .product-form__form__color-container__color__label {
     border: 2px solid var(--light-blue);
+}
+
+.model-input:checked + .product-form__form__model-container__model__label {
+    border: 3px solid var(--light-blue);
 }
 
 
