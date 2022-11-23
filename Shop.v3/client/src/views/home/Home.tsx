@@ -18,8 +18,10 @@ const Home = () => {
   return (
     <div className='home'>
       <Slider />
-      <p>לשיחה עם נציג מכירות 8336*</p>
-      <p>א׳-ה׳ 09:00-17:00</p>
+      <div className='home__support'>
+        <p className='home__support__info'>לשיחה עם נציג מכירות 8336*</p>
+        <p className='home__support__date-work'>א׳-ה׳ 09:00-17:00</p>
+      </div>
       <Commercials />
       <SpecialOffers />
     </div>
