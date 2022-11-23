@@ -17,7 +17,7 @@ const commercials: Array<CommercialCardPros> = [
 
 const Commercials = () => {
     return (
-        <div className="commercials">
+        <div className="commercials page-container">
             {commercials.map((comm, idx) => <CommercialCard 
                 key={idx}
                 commHeading={comm.commHeading}
