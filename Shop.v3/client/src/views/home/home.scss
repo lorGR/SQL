@@ -1,23 +1,100 @@
 .home {
     min-height: 100vh;
     text-align: center;
+
     .slider {
         width: 100%;
-        box-shadow: 0px 2px 2px 0px rgba(194,194,194,1);
-        img{ 
+        box-shadow: 0px 2px 2px 0px rgba(219, 219, 219, 1);
+
+        img {
             width: 100%;
         }
     }
-    &__support{
+
+    &__support {
         padding: 2rem 0;
         display: flex;
         flex-direction: column;
         gap: .5rem;
+
         &__info {
             text-decoration: underline;
             font-weight: 500;
             font-size: 1.5rem;
             color: var(--light-blue);
+        }
+    }
+
+    .commercials {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+
+        a {
+            width: 40%;
+            color: var(--full-white);
+            text-decoration: none;
+
+            .commercial-card {
+                display: flex;
+                justify-content: space-around;
+                background-color: var(--dark-gray);
+                text-align: right;
+
+                &__info {
+                    width: 50%;
+                    padding: 3rem 2rem;
+
+                    &__information {
+                        &__title {
+                            font-size: 2.5rem;
+                            font-weight: 400;
+                            margin-bottom: 1rem;
+                        }
+
+                        &__subtitle {
+                            font-size: 2rem;
+                            font-weight: 300;
+                        }
+                    }
+
+                    &__btn-container {
+                        margin-top: 8rem;
+
+                        &__btn {
+                            padding: 1rem 2rem;
+                            font-size: 1.25rem;
+                            border: none;
+                            color: var(--full-white);
+                            background-color: var(--dark-gray);
+                            border: 1px solid var(--full-white);
+                            border-radius: .25rem;
+                            transition: all .3s ease-in-out;
+                        }
+                    }
+                }
+
+                &__display {
+                    &__figure {
+                        &__image {
+                            transition: all .5s ease-in-out;
+                        }
+                    }
+                }
+            }
+        }
+
+        a:hover {
+            .commercial-card__info__btn-container__btn {
+                color: black;
+                background-color: var(--light-blue);
+                border: 1px solid var(--light-blue);
+            }
+
+            .commercial-card__display__figure__image {
+                scale: 105%;
+            }
         }
     }
 }
