@@ -29,6 +29,10 @@ const Cart = () => {
     const [userProducts, setUserProducts] = useState<CartProduct[]>();
     const [productsPrice, setProductsPrice] = useState<any>();
 
+    // TODO :
+    // Bug fix 
+    // cannot add / display the same product
+    
     const getUserProducts = async () => {
         try {
             if (user) {
