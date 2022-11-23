@@ -1,4 +1,13 @@
 @import "./components/navbar/navbar.scss";
+@import "./components/storenav/storenav.scss";
+
+:root {
+    --dark-gray: #323232;
+    --light-blue: #0088cc;
+    --light-white: #f2f2f2;
+    --half-white: #eaeaea;
+    --full-white: #FFF;
+}   
 
 * {
     margin: 0;
