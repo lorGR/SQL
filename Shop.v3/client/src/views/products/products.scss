@@ -18,8 +18,85 @@
         grid-row: auto auto;
         grid-column-gap: 1rem;
         grid-row-gap: 1rem;
+
         &__product {
             border: 1px solid var(--light-gray);
+            text-decoration: none;
+            color: var(--dark-gray);
+            transition: outline .1s linear;
+            transition: border .001 linear;
+        }
+        &__product:hover {
+            outline: 3px solid var(--light-blue);
+            border: 1px solid var(--light-blue);
+            .product-card__info__btn-container__btn {
+                background: var(--light-blue);
+                color: var(--full-black);
+            }
+            .product-card__display__figure__image {
+                scale: 105%;
+            }
+        }
+    }
+}
+
+.product-card {
+    display: flex;
+    justify-content: space-between;
+
+    &__info {
+        width: 50%;
+        padding: 1.5rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+
+        &__context {
+            margin-bottom: 1.5rem;
+
+            &__name {
+                font-weight: 400;
+                font-size: 1.75rem;
+                margin-bottom: 5rem;
+            }
+
+            &__price {
+                &__number {
+                    font-size: 1.5rem;
+                }
+            }
+
+            &__price-eilat {
+                &__number {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        &__btn-container {
+            &__btn {
+                padding: .5rem 2.5rem ;
+                border: none;
+                color: var(--full-white);
+                background: var(--drak-gray-to-light-gray-gradient);
+                border-radius: .25rem;
+                font-size: 1.25rem;
+                transition: background .3s ease-in-out;
+                transition: color .4s ease-in-out;
+            }
+        }
+    }
+
+    &__display {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__figure {
+            width: 80%;
+            &__image {
+                width: 100%;
+                transition: all .5s ease-in-out;
+            }
         }
     }
 }

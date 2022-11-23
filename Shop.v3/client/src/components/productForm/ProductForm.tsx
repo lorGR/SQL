@@ -143,54 +143,67 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 <img className="product-form__figure__image" src={productImg} alt={productName} />
             </figure>
             <form className="product-form__form" onSubmit={handleAddToCart}>
+                {productInfo[0].storage !== null && <p className="product-form__form__storage-title">בחר נפח</p>}
                 {productInfo[0].storage !== null &&
-                    productInfo.map((productStorage, idx) => {
-                        return (
-                            <div className="product-form__form__storage" key={idx}>
-                                <label htmlFor={productStorage.storage!} >{productStorage.storage}</label>
-                                <input type="radio" name="storage" id={productStorage.storage!} value={productStorage.storage!} required />
-                                <p className="product-form__form__price">מחיר {productStorage.price} ₪</p>
-                                <p className="product-form__form__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
-                            </div>
-                        );
-                    })
+                    <div className="product-form__form__storage-container">
+                        {productInfo.map((productStorage, idx) => {
+                            return (
+                                <div className="product-form__form__storage-container__storage" key={idx}>
+                                    <label htmlFor={productStorage.storage!} >{productStorage.storage}</label>
+                                    <input type="radio" name="storage" id={productStorage.storage!} value={productStorage.storage!} required />
+                                    <p className="product-form__form__price">מחיר {productStorage.price} ₪</p>
+                                    <p className="product-form__form__price-eilat">מחיר באילת {productStorage.price_eilat} ₪</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 }
+                {productInfo[0].screen_size !== null && storeType !== 'mac' && <p className="product-form__form__screen-size-title">בחר מידה</p>}
                 {productInfo[0].screen_size !== null &&
                     storeType !== 'mac' &&
-                    productInfo.map((productScreenSize, idx) => {
-                        return (
-                            <div className="product-form__form__screen-size" key={idx}>
-                                <label htmlFor={productScreenSize.screen_size!}>{productScreenSize.screen_size}</label>
-                                <input type="radio" name="screenSize" id={productScreenSize.screen_size!} required value={productScreenSize.screen_size!} />
-                                <p className="product-form__form__price">מחיר {productScreenSize.price} ₪</p>
-                                <p className="product-form__form__price-eilat">מחיר באילת {productScreenSize.price_eilat} ₪</p>
-                            </div>
-                        );
-                    })
+                    <div className="product-form__form__screen-size-container">
+                        {productInfo.map((productScreenSize, idx) => {
+                            return (
+                                <div className="product-form__form__screen-size-container_screen-size" key={idx}>
+                                    <label htmlFor={productScreenSize.screen_size!}>{productScreenSize.screen_size}</label>
+                                    <input type="radio" name="screenSize" id={productScreenSize.screen_size!} required value={productScreenSize.screen_size!} />
+                                    <p className="product-form__form__price">מחיר {productScreenSize.price} ₪</p>
+                                    <p className="product-form__form__price-eilat">מחיר באילת {productScreenSize.price_eilat} ₪</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 }
+                {productColors.length > 0 && productColors[0].color !== null && <p className="product-form__form__color-title">בחר בצע</p>}
                 {productColors.length > 0 && productColors[0].color !== null &&
-                    productColors.map((productColor, idx) => {
-                        // TODO :
-                        // on change color change the image above
-                        return (
-                            <div className="product-form__form__color" key={idx}>
-                                <label htmlFor={productColor.color}>{productColor.color}</label>
-                                <input onChange={handleChangeColor} type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
-                            </div>
-                        );
-                    })
+                    <div className="product-form__form__color-container">
+                        {productColors.map((productColor, idx) => {
+                            return (
+                                <div className="product-form__form__color-container__color" key={idx}>
+                                    <label className="product-form__form__color-container__color__label" htmlFor={productColor.color}>
+                                        {/* {productColor.color} */}
+                                        <input className={productColor.color.toLowerCase()} onChange={handleChangeColor} type="radio" name="productColor" id={productColor.color} value={productColor.color} required />
+                                        <div className={`${productColor.color.toLowerCase()} product-form__form__color-container__color__label__box`}></div>
+                                    </label>
+                                </div>
+                            );
+                        })}
+                    </div>
                 }
+                {productInfo[0].model !== null && <p className="product-form__form__model-title">בחר דגם</p>}
                 {productInfo[0].model !== null &&
-                    productInfo.map((productModel, idx) => {
-                        return (
-                            <div className="product-form__form__model" key={idx}>
-                                <label htmlFor={productModel.model!}>{productModel.model}</label>
-                                <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
-                                <p className="product-form__form__price">מחיר {productModel.price} ₪</p>
-                                <p className="product-form__form__price-eilat">מחיר באילת {productModel.price_eilat} ₪</p>
-                            </div>
-                        );
-                    })
+                    <div className="product-form__form__model-container">
+                        {productInfo.map((productModel, idx) => {
+                            return (
+                                <div className="product-form__form__model-container__model" key={idx}>
+                                    <label htmlFor={productModel.model!}>{productModel.model}</label>
+                                    <input type="radio" name="productModel" id={productModel.model!} value={productModel.model!} required />
+                                    <p className="product-form__form__price">מחיר {productModel.price} ₪</p>
+                                    <p className="product-form__form__price-eilat">מחיר באילת {productModel.price_eilat} ₪</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 }
                 {/* // TODO: */}
                 {/* // Display the amount of money next to button */}
