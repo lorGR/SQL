@@ -12,7 +12,7 @@ const Registration = () => {
 
     useEffect(() => {
         const allCookies = document.cookie;
-        if(allCookies.length > 0) {
+        if (allCookies.length > 0) {
             dispatch(getUserByCookie());
         }
     }, [])
@@ -43,62 +43,110 @@ const Registration = () => {
     }
 
     return (
-        <div className="registration" dir="rtl">
-            <h1>יצירת חשבון</h1>
+        <div className="registration page-container" dir="rtl">
+            <h1 className="registration__title">יצירת חשבון</h1>
             <form onSubmit={handleRegistration}>
                 <div className="registration__personal-details">
                     <h3>פרטיים אישיים</h3>
-                    <sup>*</sup>
-                    <label htmlFor="firstName">שם פרטי</label>
-                    <input type="text" name="firstName" id="firstName" />
+                    <div className="label">
+                        <label htmlFor="firstName">שם פרטי
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="firstName" id="firstName" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="lastName">שם משפחה</label>
-                    <input type="text" name="lastName" id="lastName" />
+                    <div className="label">
+                        <label htmlFor="lastName">שם משפחה
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="lastName" id="lastName" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="identifierNumber">ת.ז</label>
-                    <input type="number" name="identifierNumber" id="identifierNumber" />
+                    <div className="label">
+                        <label htmlFor="identifierNumber">ת.ז
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="number" name="identifierNumber" id="identifierNumber" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="phoneNumber">טלפון נייד של המזמין</label>
-                    <input type="number" name="phoneNumber" id="phoneNumber" />
+                    <div className="label">
+                        <label htmlFor="phoneNumber">טלפון נייד של המזמין
+                        <sup>*</sup>
+                        
+                        </label>
+                        <div className="label__input"><input type="number" name="phoneNumber" id="phoneNumber" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="email">דוא״ל</label>
-                    <input type="email" name="email" id="email" />
+                    <div className="label">
+                        <label htmlFor="email">דוא״ל
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="email" name="email" id="email" /></div>
+                    </div>
+
                 </div>
                 <div className="registration__personal-address">
                     <h3>כתובת למשלוח</h3>
-                    <sup>*</sup>
-                    <label htmlFor="city">עיר</label>
-                    <input type="text" name="city" id="city" />
+                    <div className="label">
+                        <label htmlFor="city">עיר
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="city" id="city" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="streetAddress">רחוב</label>
-                    <input type="text" name="streetAddress" id="streetAddress" />
+                    <div className="label">
+                        <label htmlFor="streetAddress">רחוב
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="streetAddress" id="streetAddress" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="houseNumber">מספר בית</label>
-                    <input type="text" name="houseNumber" id="houseNumber" />
+                    <div className="label">
+                        <label htmlFor="houseNumber">מספר בית
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="houseNumber" id="houseNumber" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="postalCode">מיקוד</label>
-                    <input type="text" name="postalCode" id="postalCode" />
+                    <div className="label">
+                        <label htmlFor="postalCode">מיקוד
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="text" name="postalCode" id="postalCode" /></div>
+                    </div>
                 </div>
                 <div className="registration__login-details">
                     <h3>פרטי התחברות</h3>
-                    <sup>*</sup>
-                    <label htmlFor="confirmEmail">דוא״ל</label>
-                    <input type="email" name="confirmEmail" id="confirmEmail" />
+                    <div className="label">
+                        <label htmlFor="confirmEmail">דוא״ל
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="email" name="confirmEmail" id="confirmEmail" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="password">סיסמה</label>
-                    <input type="password" name="password" id="password" autoComplete="true" />
+                    <div className="label">
+                        <label htmlFor="password">סיסמה
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="password" name="password" id="password" autoComplete="true" /></div>
+                    </div>
 
-                    <sup>*</sup>
-                    <label htmlFor="confirmPassword">אשר סיסמה</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" autoComplete="true" />
+                    <div className="label">
+                        <label htmlFor="confirmPassword">אשר סיסמה
+                        
+                        <sup>*</sup>
+                        </label>
+                        <div className="label__input"><input type="password" name="confirmPassword" id="confirmPassword" autoComplete="true" /></div>
+                    </div>
                 </div>
                 <div className="registration__sumbition">
                     <input type="reset" value="נקה" />
