@@ -62,9 +62,7 @@ const Cart = () => {
                     <Link to="/my-account/registration">הירשם</Link>/
                     <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך
                 </p>}
-            {!userProducts &&
-                <p className="cart__user-information">אין מוצרים בסל קניות</p>
-            }
+            {userProducts !== undefined && userProducts.length === 0 && <p>אין מוצרים בסל קניות</p>}
             {userProducts &&
                 userProducts.map(userProduct => {
                     const productId = userProduct.product_id.toString();
@@ -73,7 +71,7 @@ const Cart = () => {
                     );
                 })
             }
-            {userProducts &&
+            {userProducts !== undefined && userProducts?.length > 0 &&
                 <div className="cart__purchase">
                     <form className="cart__purchase__form">
                         <p className="cart__purchase__form__price">סה״כ לתשלום: {productsPrice} ₪</p>
