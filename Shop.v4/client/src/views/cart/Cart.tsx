@@ -66,30 +66,39 @@ const Cart = () => {
                     {/* <Link to="/my-account/registration">הירשם</Link>/
                     <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך */}
                 </p>}
-            {userProducts !== undefined && userProducts.length === 0 && <p>אין מוצרים בסל קניות</p>}
+            {userProducts !== undefined && userProducts.length === 0 &&
+                <div className="cart__no-user-information">
+                    <p>אין מוצרים בסל קניות</p>
+                </div>
+            }
             {userProducts !== undefined && userProducts.length > 0 &&
                 <div className="cart__table-container">
                     <table className="cart__table-container__tabel">
-                        <tr>
-                            <th>מוצר</th>
-                            <th>מחיר</th>
-                            <th>מחיר באילת</th>
-                            <th> סה״כ לתשלום</th>
-                            <th></th>
-                        </tr>
-                        {userProducts.map(userProduct => {
-                            const productId = userProduct.product_id.toString();
-                            return (
-                                <CartProductCard product={userProduct} key={userProduct.product_id} />
-                            );
-                        })}
+                        <tbody>
+                            <tr className="cart__table-container__table__header">
+                                <th className="cart__table-container__table__header__name">מוצר</th>
+                                <th className="cart__table-container__table__header__name">מחיר</th>
+                                <th className="cart__table-container__table__header__name">מחיר באילת</th>
+                                <th className="cart__table-container__table__header__name"> סה״כ לתשלום</th>
+                                <th className="cart__table-container__table__header__name"></th>
+                            </tr>
+                            {userProducts.map(userProduct => {
+                                const productId = userProduct.product_id.toString();
+                                return (
+                                    <CartProductCard product={userProduct} key={userProduct.product_id} />
+                                );
+                            })}
+                        </tbody>
                     </table>
                 </div>
             }
+            {/* TODO: */}
+            {/* When user click buy buy */}
+            {/* Empty his cart */}
             {userProducts !== undefined && userProducts?.length > 0 &&
                 <div className="cart__purchase">
                     <form className="cart__purchase__form">
-                        <p className="cart__purchase__form__price">סה״כ לתשלום: {productsPrice} ₪</p>
+                        <p className="cart__purchase__form__price">סה״כ לתשלום: <span className="cart__purchase__form__price__number">{productsPrice} ₪</span></p>
                         <button className="cart__purchase__form__btn">קנה עכשיו</button>
                     </form>
                 </div>

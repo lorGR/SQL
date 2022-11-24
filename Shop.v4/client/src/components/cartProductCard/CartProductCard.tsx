@@ -4,6 +4,7 @@ import { selectUser } from "../../features/user/userSlice";
 import { CartProduct } from "../../views/cart/Cart"
 
 import trashIcon from "../../assets/svg/cart/trashIcon.svg";
+import xIcon from "../../assets/svg/cart/xIcon.svg";
 
 export interface CartProductCardProps {
     product: CartProduct
@@ -36,22 +37,23 @@ const CartProductCard: React.FC<CartProductCardProps> = ({ product }) => {
         //     <p className="cart-product-card__price" >מחיר {product.price} ₪</p>
         //     <button className="cart-product-card__remove-button" onClick={handleRemoveFromCart} id={productId} >הסר מוצר</button>
         // </div>
-        <tr>
-            <td>
-                <div>
-                    <img src={product.display_img} alt={product.name} />
-                    <p>{product.name}</p>
-                </div>
-            </td>
-            <td>{product.price} ₪</td>
-            <td>{product.price_eilat} ₪</td>
-            <td>{product.price} ₪</td>
-            <td>
-                <button onClick={handleRemoveFromCart} id={productId}>
-                    <img onClick={handleRemoveFromCart} id={productId} width="30px" src={trashIcon} alt="remove product trash icon" />
-                </button>
-            </td>
-        </tr>
+
+            <tr className="cart__table-container__table__product">
+                <td className="cart__table-container__table__product__name">
+                    <div className="cart__table-container__table__product__name__description">
+                        <img src={product.display_img} alt={product.name} />
+                        <p>{product.name}</p>
+                    </div>
+                </td>
+                <td className="cart__table-container__table__product__price">{product.price} ₪</td>
+                <td className="cart__table-container__table__product__price-eilat">{product.price_eilat} ₪</td>
+                <td className="cart__table-container__table__product__total-price">{product.price} ₪</td>
+                <td className="cart__table-container__table__product__remove-product">
+                    <button className="cart__table-container__table__product__remove-product__btn" onClick={handleRemoveFromCart} id={productId}>
+                        <img className="cart__table-container__table__product__remove-product__btn__image" onClick={handleRemoveFromCart} id={productId} width="30px" src={xIcon} alt="remove product trash icon" />
+                    </button>
+                </td>
+            </tr>
     )
 }
 
