@@ -73,7 +73,7 @@ const Cart = () => {
             }
             {userProducts !== undefined && userProducts.length > 0 &&
                 <div className="cart__table-container">
-                    <table className="cart__table-container__tabel">
+                    <table className="cart__table-container__table">
                         <tbody>
                             <tr className="cart__table-container__table__header">
                                 <th className="cart__table-container__table__header__name">מוצר</th>
