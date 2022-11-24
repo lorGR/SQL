@@ -30,7 +30,7 @@ const MyAccount = () => {
     }
 
     return (
-        <div className="my-account">
+        <div className="my-account page-container">
             <h1 className="my-account__title">אזור אישי</h1>
             <div className="my-account__container">
                 <div className="my-account__new-user">
