@@ -3,6 +3,8 @@ import { useAppSelector } from "../../app/hooks";
 import { selectUser } from "../../features/user/userSlice";
 import { CartProduct } from "../../views/cart/Cart"
 
+import trashIcon from "../../assets/svg/cart/trashIcon.svg";
+
 export interface CartProductCardProps {
     product: CartProduct
 }
@@ -26,14 +28,30 @@ const CartProductCard: React.FC<CartProductCardProps> = ({ product }) => {
     }
 
     return (
-        <div className="cart-product-card" key={product.product_id}>
-            <h4 className="cart-product-card__name">{product.name}</h4>
-            <figure className="cart-product-card__figure">
-                <img className="cart-product-card__figure__image" src={product.display_img} alt={product.name} />
-            </figure>
-            <p className="cart-product-card__price" >מחיר {product.price} ₪</p>
-            <button className="cart-product-card__remove-button" onClick={handleRemoveFromCart} id={productId} >הסר מוצר</button>
-        </div>
+        // <div className="cart-product-card" key={product.product_id}>
+        //     <h4 className="cart-product-card__name">{product.name}</h4>
+        //     <figure className="cart-product-card__figure">
+        //         <img className="cart-product-card__figure__image" src={product.display_img} alt={product.name} />
+        //     </figure>
+        //     <p className="cart-product-card__price" >מחיר {product.price} ₪</p>
+        //     <button className="cart-product-card__remove-button" onClick={handleRemoveFromCart} id={productId} >הסר מוצר</button>
+        // </div>
+        <tr>
+            <td>
+                <div>
+                    <img src={product.display_img} alt={product.name} />
+                    <p>{product.name}</p>
+                </div>
+            </td>
+            <td>{product.price} ₪</td>
+            <td>{product.price_eilat} ₪</td>
+            <td>{product.price} ₪</td>
+            <td>
+                <button onClick={handleRemoveFromCart} id={productId}>
+                    <img onClick={handleRemoveFromCart} id={productId} width="30px" src={trashIcon} alt="remove product trash icon" />
+                </button>
+            </td>
+        </tr>
     )
 }
 

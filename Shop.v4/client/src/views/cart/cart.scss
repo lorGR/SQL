@@ -1,0 +1,24 @@
+.cart {
+    &__title {
+        padding: 0 4rem;
+        background-color: var(--light-white);
+        margin-top: 2rem;
+    }
+    &__no-user-information {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem;
+        border: 1px solid var(--light-gray);
+        margin-top: 5rem;
+        gap: 1rem;
+        a {
+            text-decoration: none;
+            color: var(--full-white);
+            background: var(--drak-gray-to-light-gray-gradient);
+            padding: 1rem 2rem;
+            border-radius: .25rem;
+        }
+    }
+}

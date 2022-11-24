@@ -32,7 +32,7 @@ const Cart = () => {
     // TODO :
     // Bug fix 
     // cannot add / display the same product
-    
+
     const getUserProducts = async () => {
         try {
             if (user) {
@@ -55,21 +55,36 @@ const Cart = () => {
     }, [user]);
 
     return (
-        <div className="cart">
+        <div className="cart page-container">
             <h1 className="cart__title">סל הקניות</h1>
             {!user &&
                 <p className="cart__no-user-information">
-                    <Link to="/my-account/registration">הירשם</Link>/
-                    <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך
+                    <Link to="/my-account/registration">הירשם</Link>
+                    או
+                    <Link to="/my-account">התחבר</Link>
+                    בכדי לראות את סל הקניות שלך
+                    {/* <Link to="/my-account/registration">הירשם</Link>/
+                    <Link to="/my-account">התחבר</Link> בכדי לראות את סל הקניות שלך */}
                 </p>}
             {userProducts !== undefined && userProducts.length === 0 && <p>אין מוצרים בסל קניות</p>}
-            {userProducts &&
-                userProducts.map(userProduct => {
-                    const productId = userProduct.product_id.toString();
-                    return (
-                        <CartProductCard product={userProduct} key={userProduct.product_id}/>
-                    );
-                })
+            {userProducts !== undefined && userProducts.length > 0 &&
+                <div className="cart__table-container">
+                    <table className="cart__table-container__tabel">
+                        <tr>
+                            <th>מוצר</th>
+                            <th>מחיר</th>
+                            <th>מחיר באילת</th>
+                            <th> סה״כ לתשלום</th>
+                            <th></th>
+                        </tr>
+                        {userProducts.map(userProduct => {
+                            const productId = userProduct.product_id.toString();
+                            return (
+                                <CartProductCard product={userProduct} key={userProduct.product_id} />
+                            );
+                        })}
+                    </table>
+                </div>
             }
             {userProducts !== undefined && userProducts?.length > 0 &&
                 <div className="cart__purchase">
