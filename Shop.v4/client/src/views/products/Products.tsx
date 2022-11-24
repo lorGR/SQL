@@ -49,6 +49,7 @@ const Products = () => {
             } else if (storeType === "iphone") {
                 setStoreHeader(iphoneHeader);
                 setStoreHeaderTitle("סדרת iPhone 14");
+                setStoreHeaderText("");
             } else if (storeType === "ipad") {
                 setStoreHeader(ipadHeader);
                 setStoreHeaderTitle("כל דגמי iPad לרכישה אונליין");
