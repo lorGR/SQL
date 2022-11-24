@@ -19,6 +19,8 @@ const Products = () => {
 
     const [storeProducts, setStoreProducts] = useState<Product[]>();
     const [storeHeader, setStoreHeader] = useState<string>("");
+    const [storeHeaderTitle, setStoreHeaderTitle] = useState<string>("");
+    const [storeHeaderText, setStoreHeaderText] = useState<string>("");
 
     const dispatch = useAppDispatch();
 
@@ -42,16 +44,26 @@ const Products = () => {
         try {
             if (storeType === "mac") {
                 setStoreHeader(macHeader);
+                setStoreHeaderTitle("כל דגמי Mac לרכישה אונליין");
+                setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
             } else if (storeType === "iphone") {
                 setStoreHeader(iphoneHeader);
+                setStoreHeaderTitle("סדרת iPhone 14");
             } else if (storeType === "ipad") {
                 setStoreHeader(ipadHeader);
+                setStoreHeaderTitle("כל דגמי iPad לרכישה אונליין");
+                setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
             } else if (storeType === "apple_watch") {
                 setStoreHeader(applewatchHeader);
+                setStoreHeaderTitle("כל דגמי Apple Watch לרכישה אונליין");
+                setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
             } else if (storeType === "air_pods") {
                 setStoreHeader(airpodsHeader);
+                setStoreHeaderText("AirPods ללא חוטים. ללא מאמץ. חוויה קסומה מאי פעם.");
             } else {
                 setStoreHeader(appletvHeader);
+                setStoreHeaderTitle("כל דגמי Apple TV לרכישה אונליין");
+                setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
             }
         } catch (error) {
             console.error(error);
@@ -69,6 +81,10 @@ const Products = () => {
             <div className="products__header">
                 <figure className="products__header__figure">
                     <img className="products__header__figure__image" src={storeHeader} alt="store header" draggable="false" />
+                    <p className="products__header__figure__title">{storeHeaderTitle}</p>
+                    {storeHeaderText.length > 0 &&
+                        <p className="products__header__figure__text">{storeHeaderText}</p>
+                    }
                 </figure>
             </div>
             {/* <h2 className="products__title">{storeType?.toUpperCase()}</h2> */}
