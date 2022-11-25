@@ -22,6 +22,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const user: User = useAppSelector(selectUser);
+
+    // TODO:
+    // WHEN no user loggid in server crashes
     const userId = user.user_id;
 
     useEffect(() => {
