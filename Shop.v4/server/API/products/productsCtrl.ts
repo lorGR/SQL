@@ -242,3 +242,22 @@ export async function getProductsPrice(req: express.Request, res: express.Respon
         res.status(500).send({ error: error.message });
     }
 }
+
+export async function deleteProductsFromCart(req: express.Request, res: express.Response) {
+    try {
+        const { userId } = req.body;
+        if (!userId) throw new Error("Couldn't receive userId from req.body");
+
+        const sql = `DELETE FROM cart WHERE user_id = '${userId}'`;
+        connection.query(sql, (error) => {
+            try {
+                if(error) throw error;
+                res.send({bought: true});
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}

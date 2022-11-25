@@ -32,6 +32,9 @@ const Cart = () => {
     // TODO :
     // Bug fix 
     // cannot add / display the same product
+    // how to fix - add colum to the table named amount 
+    // if there is no product id in the cart start with one
+    // if there is product id in the cart add to the amount table +1 each time
 
     const getUserProducts = async () => {
         try {
@@ -53,6 +56,18 @@ const Cart = () => {
     useEffect(() => {
         getUserProducts();
     }, [user]);
+
+    const handleUsersBuy = async () => {
+        try {
+            if (user) {
+                const userId = user.user_id;
+                const { data } = await axios.delete("/products/delete-products-from-cart", { data: { userId } });
+                if(!data) throw new Error("Couldn't receive data from axios DELETE '/delete-products-form-cart' ");
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div className="cart page-container">
@@ -97,7 +112,7 @@ const Cart = () => {
             {/* Empty his cart */}
             {userProducts !== undefined && userProducts?.length > 0 &&
                 <div className="cart__purchase">
-                    <form className="cart__purchase__form">
+                    <form onSubmit={handleUsersBuy} className="cart__purchase__form">
                         <p className="cart__purchase__form__price">סה״כ לתשלום: <span className="cart__purchase__form__price__number">{productsPrice} ₪</span></p>
                         <button className="cart__purchase__form__btn">קנה עכשיו</button>
                     </form>

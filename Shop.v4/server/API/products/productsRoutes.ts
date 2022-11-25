@@ -1,5 +1,5 @@
 import express from "express";
-import { getProductInfo, getProductsByType, getProductColors, getProductId, addToCart, getUserProducts, getProductPreviewImg, deleteProductFromCart, getProductsPrice } from "./productsCtrl";
+import { getProductInfo, getProductsByType, getProductColors, getProductId, addToCart, getUserProducts, getProductPreviewImg, deleteProductFromCart, getProductsPrice, deleteProductsFromCart } from "./productsCtrl";
 
 const router = express.Router();
 
@@ -13,4 +13,5 @@ router
     .post("/get-product-preview-img", getProductPreviewImg)
     .post("/get-products-price-cart", getProductsPrice)
     .delete("/delete-product-from-cart", deleteProductFromCart)
+    .delete("/delete-products-from-cart", deleteProductsFromCart)
 export default router;
