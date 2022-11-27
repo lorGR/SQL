@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import searchIcon from "../../assets/svg/storenav/searchIcon.svg";
+
 const Storenav = () => {
   return (
     <div className="storenav">
@@ -13,10 +15,12 @@ const Storenav = () => {
       {/* TODO: */}
       {/* Manage the search bar */}
       
-      {/* <form action="">
+      <form action="">
         <input type="text" name="" id="" placeholder="חיפוש" />
-        <button>מצא לי תוצאות</button>
-      </form> */}
+        <button>
+          <img src={searchIcon} alt="searchIcon" />
+        </button>
+      </form>
 
     </div>
   )
