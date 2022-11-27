@@ -1,0 +1,114 @@
+.cart {
+    &__title {
+        padding: 0 1rem;
+        background-color: var(--light-white);
+        margin-top: 2rem;
+    }
+
+    &__no-user-information {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem;
+        border: 1px solid var(--light-gray);
+        margin-top: 5rem;
+        gap: 1rem;
+        font-size: 2rem;
+
+        p {
+            font-size: 2rem;
+        }
+
+        a {
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--full-white);
+            background: var(--drak-gray-to-light-gray-gradient);
+            padding: 1rem 2rem;
+            border-radius: .25rem;
+            transition: background .4s ease-in;
+            transition: color .3s ease-in;
+        }
+
+        a:hover {
+            background: var(--light-blue);
+            color: var(--black);
+        }
+    }
+
+    &__table-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5rem;
+        border: 1px solid var(--light-gray);
+        &__table {
+            padding: 1rem;
+            &__header {
+                font-size: 1.5rem;
+            }
+            &__products{
+                
+                display: flex;
+            }
+            &__product {
+                text-align: center;
+                margin-bottom: 1rem;
+                font-size: 1.25rem;
+                &__name {
+                    &__description {
+                        display: flex;
+                        align-items: center;
+                        justify-content: right;
+                        gap: 2rem;
+
+                        img {
+                            width: 20%;
+                            padding: 2rem;
+                        }
+                    }
+                }
+                &__remove-product {
+                    &__btn {
+                        border: none;
+                        background-color: var(--full-white);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    &__purchase {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        &__form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            &__price {
+                font-size: 1.25rem;
+                &__number {
+                    font-size: 1.75rem;
+                }
+            }
+            &__btn {
+                border: none;
+                background: var(--drak-gray-to-light-gray-gradient);
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+                color: var(--full-white);
+                border-radius: .25rem;
+                cursor: pointer;
+                transition: background .4s ease-in;
+                transition: color .3s ease-in;
+            }
+            &__btn:hover {
+                background: var(--light-blue);
+                color: var(--black);
+            }
+        }
+    }
+}
+

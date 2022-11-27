@@ -1,0 +1,98 @@
+.registration {
+    &__title {
+        padding: 0 1rem;
+        background-color: var(--light-white);
+        margin-top: 2rem;
+    }
+
+    &__personal-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__personal-address {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__login-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+        font-weight: 400;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .label {
+        display: flex;
+        font-size: 1.25rem;
+        font-weight: 300;
+
+        label {
+            width: 11rem;
+        }
+
+        &__input {
+            input {
+                width: 20rem;
+                font-size: 1rem;
+                outline: none;
+                padding: .25rem;
+            }
+        }
+    }
+
+    &__sumbition {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+
+        input {
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--full-white);
+            background: var(--drak-gray-to-light-gray-gradient);
+            padding: .5rem 1.5rem;
+            border-radius: .25rem;
+            transition: background .4s ease-in;
+            transition: color .3s ease-in;
+            width: fit-content;
+            cursor: pointer;
+            border: none;
+        }
+
+        input:hover {
+            background: var(--light-blue);
+            color: var(--black);
+        }
+
+        button {
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: var(--full-white);
+            background: var(--drak-gray-to-light-gray-gradient);
+            padding: .5rem 1.5rem;
+            border-radius: .25rem;
+            transition: background .4s ease-in;
+            transition: color .3s ease-in;
+            width: fit-content;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background: var(--light-blue);
+            color: var(--black);
+        }
+    }
+}

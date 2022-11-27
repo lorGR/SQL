@@ -1,0 +1,67 @@
+@import "./components/navbar/navbar.scss";
+@import "./components/storenav/storenav.scss";
+@import "./views/home/home.scss";
+@import "./views/products/products.scss";
+@import "./views/product/product.scss";
+@import "./components/footer/footer.scss";
+@import "./views/cart/cart.scss";
+@import "./views/myAccount/myAccount.scss";
+@import "./views/registration/registration.scss";
+
+:root {
+    --dark-gray: #323232;
+    --light-gray: #E2E2E2;
+    --light-blue: #50a0c8;
+    --light-white: #f2f2f2;
+    --half-white: #eaeaea;
+    --full-white: #FFF;
+    --full-black: #000;
+    --medium-gray: #F1F1F1;
+    --drak-gray-to-light-gray-gradient: linear-gradient(90deg, #6b6b6b 0%, #383838 100%);
+    --footer-bg: #F2F2F2;
+    --medium-light-gray: #ABABAB;
+
+    // input colors
+    --space-gray: #636466;
+    --starlight: #efe9e9;
+    --midnight: #3B3C42;
+    --silver: #F5F6F8;
+    --gold: #FDEEE6;
+    --red: #C00001;
+    --blue: #37527D;
+    --white: #fff;
+    --purple: #896F95;
+    --deep-purple: #3D3643;
+    --pink: #FEC0CA;
+    --green: #374737;
+    --black: #000000;
+    --yellow: #F0E58B;
+    --orange: #F78A41;
+    --beige: #E4DCCC;
+    --gray: #A0928D;
+    --graphic: #45433E;
+}   
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+.App {
+    height: 100vh;
+    .main {
+        height: 100%;
+    }
+}
+
+.page-container {
+    padding: 0 15rem;
+}
+
+@media(min-width: 1440px) {
+    .page-container {
+        padding: 0 20rem;
+    }
+}
