@@ -60,7 +60,8 @@ const Products = () => {
                 setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
             } else if (storeType === "air_pods") {
                 setStoreHeader(airpodsHeader);
-                setStoreHeaderText("AirPods ללא חוטים. ללא מאמץ. חוויה קסומה מאי פעם.");
+                setStoreHeaderTitle("AirPods ללא חוטים. ללא מאמץ. חוויה קסומה מאי פעם.");
+                // setStoreHeaderText("");
             } else if (storeType === "apple_tv") {
                 setStoreHeader(appletvHeader);
                 setStoreHeaderTitle("כל דגמי Apple TV לרכישה אונליין");
