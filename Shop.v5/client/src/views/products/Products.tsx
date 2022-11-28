@@ -113,6 +113,11 @@ const Products = () => {
                         <h2 className="products__search-results__title">תוצאות עבור: {storeType}</h2>
                     </div>
             }
+            {storeProducts?.length === 0 &&
+                    <div className="products__results-not-found page-container">
+                        <p className="products__results-not-found__title">לא נמצאו תוצאות עבור: {storeType}</p>
+                    </div>
+                }
             <div className="products__container page-container">
                 
                 {storeProducts?.map((product, idx) => {
@@ -122,11 +127,7 @@ const Products = () => {
                         </Link>
                     );
                 })}
-                {storeProducts?.length === 0 &&
-                    <div>
-                        <p>לא נמצאו תוצאות עבור: {storeType}</p>
-                    </div>
-                }
+                
             </div>
         </div>
     )
