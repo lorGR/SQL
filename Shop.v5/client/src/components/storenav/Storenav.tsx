@@ -11,7 +11,7 @@ const Storenav = () => {
       event.preventDefault();
       if(event.target[0].value.length > 0) {
         navigate(`/store/${event.target[0].value}`);
-        console.dir(event.target[0].value);
+        event.target[0].value = "";
       }
     } catch (error) {
       console.error(error);

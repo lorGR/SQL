@@ -16,7 +16,6 @@ import appletvHeader from "../../assets/images/productsHeader/appletvHeader.jpeg
 
 const Products = () => {
     const { storeType } = useParams();
-    const { userSearch } = useParams();
 
     const [storeProducts, setStoreProducts] = useState<Product[]>();
     const [storeHeader, setStoreHeader] = useState<string>("");
@@ -35,18 +34,6 @@ const Products = () => {
             if (!data) throw new Error("Couldn't receive data from axios '/get-products-by-type' ");
             const { result } = data;
             const products = await extractUniqueProductArray(result, 'name');
-            setStoreProducts(products);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    async function getProductsBySearch(userSearch: string) {
-        try {
-            const { data } = await axios.post("/products/get-products-by-search", { userSearch });
-            if (!data) throw new Error("Couldn't receieve data from axios post '/get-products-by-search'");
-            const { result } = data;
-            const products = await extractUniqueProductArray(result, 'name')
             setStoreProducts(products);
         } catch (error) {
             console.error(error);
@@ -91,7 +78,6 @@ const Products = () => {
     useEffect(() => {
         storeType !== undefined && getProductsByType(storeType);
         storeType !== undefined && setHeaderImage(storeType);
-        storeType === undefined && userSearch !== undefined && getProductsBySearch(userSearch);
     }, [storeType]);
 
     return (
@@ -109,17 +95,17 @@ const Products = () => {
                 </div>
             }
             {storeHeader.length === 0 &&
-                    <div className="products__search-results page-container">
-                        <h2 className="products__search-results__title">תוצאות עבור: {storeType}</h2>
-                    </div>
+                <div className="products__search-results page-container">
+                    <h2 className="products__search-results__title">תוצאות עבור: {storeType}</h2>
+                </div>
             }
             {storeProducts?.length === 0 &&
-                    <div className="products__results-not-found page-container">
-                        <p className="products__results-not-found__title">לא נמצאו תוצאות עבור: {storeType}</p>
-                    </div>
-                }
+                <div className="products__results-not-found page-container">
+                    <p className="products__results-not-found__title">לא נמצאו תוצאות עבור: {storeType}</p>
+                </div>
+            }
             <div className="products__container page-container">
-                
+
                 {storeProducts?.map((product, idx) => {
                     return (
                         <Link className="products__container__product" to={`../store/${product.type.toLocaleLowerCase()}/${product.name}`} key={idx}>
@@ -127,7 +113,7 @@ const Products = () => {
                         </Link>
                     );
                 })}
-                
+
             </div>
         </div>
     )

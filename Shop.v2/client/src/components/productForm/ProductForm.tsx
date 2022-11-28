@@ -9,8 +9,6 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors }) => {
     const { storeType } = useParams();
     return (
-        // render product img
-        // <img src="" alt="" />
         <form>
             {productInfo[0].storage !== null &&
                 productInfo.map((productStorage, idx) => {
@@ -35,8 +33,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
             }
             {productColors.length > 0 &&
                 productColors.map((productColor, idx) => {
-                    // TODO : 
-                    // on change color change the image above
                     return (
                         <div key={idx}>
                             <label htmlFor={productColor.color}>{productColor.color}</label>
@@ -55,10 +51,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                     );
                 })
             }
-            {/* TODO : */}
-            {/* Check if user is logged in  */}
-            {/* If not logged in: - alert you must be a logged in */}
-            {/* If logged in - add to cart */}
             <button>הוסף לסל</button>
         </form>
     )

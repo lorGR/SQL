@@ -33,15 +33,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
         addToCart();
     }, [productId]);
 
-    // console.log(productColors);
-
     const handleAddToCart = async (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
-            // TODO: 
-            // from event outputs
-            // get the id of the product
-            // add to cart the product_id and user_id as foreign keys
             if (storeType === "mac") {
                 if (productName !== "Mac Mini" && productName !== "Mac Pro" && productName !== "Mac Studio") {
 

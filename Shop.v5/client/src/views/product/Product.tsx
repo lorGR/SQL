@@ -69,10 +69,7 @@ const Product = () => {
 
     return (
         <div className="product page-container">
-            {/* // TODO: */}
-            {/* // Render a product header image */}
             <h1 className="product__title">בחר את ה- {productName} שלך</h1>
-            {/* {productInfo !== undefined && <p className="product__early-price">החל מ- {productInfo[0].price} ₪</p>} */}
             {productInfo !== undefined && productColors !== undefined &&
                 <ProductForm productInfo={productInfo} productColors={productColors} />}
         </div>
