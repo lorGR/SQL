@@ -17,7 +17,7 @@ import appletvHeader from "../../assets/images/productsHeader/appletvHeader.jpeg
 const Products = () => {
     const { storeType } = useParams();
     const { userSearch } = useParams();
-    
+
     const [storeProducts, setStoreProducts] = useState<Product[]>();
     const [storeHeader, setStoreHeader] = useState<string>("");
     const [storeHeaderTitle, setStoreHeaderTitle] = useState<string>("");
@@ -41,9 +41,9 @@ const Products = () => {
         }
     }
 
-    async function getProductsBySearch(userSearch : string) {
+    async function getProductsBySearch(userSearch: string) {
         try {
-            const { data } = await axios.post("/products/get-products-by-search", {userSearch});
+            const { data } = await axios.post("/products/get-products-by-search", { userSearch });
             if (!data) throw new Error("Couldn't receieve data from axios post '/get-products-by-search'");
             const { result } = data;
             const products = await extractUniqueProductArray(result, 'name')
@@ -74,10 +74,14 @@ const Products = () => {
             } else if (storeType === "air_pods") {
                 setStoreHeader(airpodsHeader);
                 setStoreHeaderText("AirPods ללא חוטים. ללא מאמץ. חוויה קסומה מאי פעם.");
-            } else {
+            } else if (storeType === "apple_tv") {
                 setStoreHeader(appletvHeader);
                 setStoreHeaderTitle("כל דגמי Apple TV לרכישה אונליין");
                 setStoreHeaderText("iDigital - המומחים של Apple בישראל.");
+            } else {
+                setStoreHeader("");
+                setStoreHeaderTitle("");
+                setStoreHeaderText("");
             }
         } catch (error) {
             console.error(error);
@@ -92,18 +96,25 @@ const Products = () => {
 
     return (
         <div className="products">
-            {/* TODO: make the title not upper case and remove underscore if there is */}
-            <div className="products__header">
-                <figure className="products__header__figure">
-                    <img className="products__header__figure__image" src={storeHeader} alt="store header" draggable="false" />
-                    <p className="products__header__figure__title">{storeHeaderTitle}</p>
-                    {storeHeaderText.length > 0 &&
-                        <p className="products__header__figure__text">{storeHeaderText}</p>
-                    }
-                </figure>
-            </div>
-            {/* <h2 className="products__title">{storeType?.toUpperCase()}</h2> */}
+
+            {storeHeader.length !== 0 &&
+                <div className="products__header">
+                    <figure className="products__header__figure">
+                        <img className="products__header__figure__image" src={storeHeader} alt="store header" draggable="false" />
+                        <p className="products__header__figure__title">{storeHeaderTitle}</p>
+                        {storeHeaderText.length > 0 &&
+                            <p className="products__header__figure__text">{storeHeaderText}</p>
+                        }
+                    </figure>
+                </div>
+            }
+            {storeHeader.length === 0 &&
+                    <div className="products__search-results page-container">
+                        <h2 className="products__search-results__title">תוצאות עבור: {storeType}</h2>
+                    </div>
+            }
             <div className="products__container page-container">
+                
                 {storeProducts?.map((product, idx) => {
                     return (
                         <Link className="products__container__product" to={`../store/${product.type.toLocaleLowerCase()}/${product.name}`} key={idx}>
@@ -111,6 +122,11 @@ const Products = () => {
                         </Link>
                     );
                 })}
+                {storeProducts?.length === 0 &&
+                    <div>
+                        <p>לא נמצאו תוצאות עבור: {storeType}</p>
+                    </div>
+                }
             </div>
         </div>
     )

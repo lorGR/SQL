@@ -29,6 +29,17 @@
         }
     }
 
+    &__search-results{
+        &__title {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            background-color: var(--light-gray);
+            padding: .5rem .25rem;
+            font-weight: 400;
+            font-size: 1.75rem;
+        }
+    }
+
     &__container {
         display: grid;
         grid-template-columns: 1fr 1fr;
