@@ -15,20 +15,17 @@ const Slider = () => {
     const [sliderImage, setSliderImage] = useState<string>();
 
     const sliderMotion = () => {
-        // for (let i = 0; i < sliderImages.length; i++) {
-        //     setSliderImage(sliderImages[i]);
-        //     console.log(setSliderImage);
-        // }
+
     }
 
     useEffect(() => {
-        // sliderMotion();
+        sliderMotion();
     }, []);
     // TODO :
     // Logic of slider with buttons
     return (
         <div className="slider">
-            {/* <img src={sliderImage} alt="Slider Images" /> */}
+            <img src={sliderImage} alt="Slider Images" />
         </div>
     )
 }
