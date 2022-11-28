@@ -15,7 +15,14 @@ const Slider = () => {
     const [sliderImage, setSliderImage] = useState<string>(sliderImages[0]);
 
     const sliderMotion = () => {
-    
+        let counter = 1;
+        setInterval(() => {
+            setSliderImage(sliderImages[counter]);
+            counter++;
+            if(counter === 8) {
+                counter = 0;
+            }
+        }, 5000)
     }
 
     useEffect(()=> {
