@@ -6,18 +6,34 @@ export async function getProductsByType(req: express.Request, res: express.Respo
         const { storeType } = req.body;
         if (!storeType) throw new Error("Couldn't receive data from req.body");
 
-        const sql = `
-            SELECT DISTINCT name, price ,price_eilat
+        if (storeType !== "mac" && storeType !== "iphone" && storeType !== "ipad" &&
+            storeType !== "apple_watch" && storeType !== "air_pods" && storeType !== "apple_tv") {
+            const sql = `SELECT DISTINCT name, price ,price_eilat, type
             FROM products
-            WHERE type = '${storeType}'`;
-        await connection.query(sql, (error, result) => {
-            try {
-                if (error) throw error;
-                res.send({ result });
-            } catch (error) {
-                res.status(500).send({ error: error.message });
-            }
-        });
+            WHERE name LIKE '%${storeType}%'`;
+
+            await connection.query(sql, (error, result) => {
+                try {
+                    if(error) throw error;
+                    res.send({result});
+                } catch (error) {
+                    res.status(500).send({ error: error.message });
+                }
+            })
+        } else {
+            const sql = `
+                SELECT DISTINCT name, price ,price_eilat, type
+                FROM products
+                WHERE type = '${storeType}'`;
+            await connection.query(sql, (error, result) => {
+                try {
+                    if (error) throw error;
+                    res.send({ result });
+                } catch (error) {
+                    res.status(500).send({ error: error.message });
+                }
+            });
+        }
     } catch (error) {
         res.status(500).send({ error: error.message });
     }
@@ -251,12 +267,32 @@ export async function deleteProductsFromCart(req: express.Request, res: express.
         const sql = `DELETE FROM cart WHERE user_id = '${userId}'`;
         connection.query(sql, (error) => {
             try {
-                if(error) throw error;
-                res.send({bought: true});
+                if (error) throw error;
+                res.send({ bought: true });
             } catch (error) {
                 res.status(500).send({ error: error.message });
             }
         })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+}
+
+export async function getProductsBySearch(req: express.Request, res: express.Response) {
+    try {
+        const { userSearch } = req.body;
+        if (!userSearch) throw new Error("Couldn't receive userSerach from req.body");
+
+        const sql = `SELECT DISTINCT name, price, price_eilat FROM products WHERE name LIKE '%${userSearch}%'`;
+
+        connection.query(sql, (error, result) => {
+            try {
+                if (error) throw error;
+                res.send({ result });
+            } catch (error) {
+                res.status(500).send({ error: error.message });
+            }
+        });
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

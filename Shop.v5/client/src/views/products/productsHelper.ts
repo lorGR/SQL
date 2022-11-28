@@ -1,7 +1,8 @@
 export interface Product {
     name: string,
     price: number,
-    price_eilat: number
+    price_eilat: number,
+    type: string
 }
 
 export function extractUniqueProductArray(productsArray: Array<Product>, parm: string): Array<Product> | any {

@@ -1,5 +1,5 @@
 import express from "express";
-import { getProductInfo, getProductsByType, getProductColors, getProductId, addToCart, getUserProducts, getProductPreviewImg, deleteProductFromCart, getProductsPrice, deleteProductsFromCart } from "./productsCtrl";
+import { getProductInfo, getProductsByType, getProductColors, getProductId, addToCart, getUserProducts, getProductPreviewImg, deleteProductFromCart, getProductsPrice, deleteProductsFromCart, getProductsBySearch } from "./productsCtrl";
 
 const router = express.Router();
 
@@ -14,4 +14,5 @@ router
     .post("/get-products-price-cart", getProductsPrice)
     .delete("/delete-product-from-cart", deleteProductFromCart)
     .delete("/delete-products-from-cart", deleteProductsFromCart)
+    .post("/get-products-by-search", getProductsBySearch)
 export default router;

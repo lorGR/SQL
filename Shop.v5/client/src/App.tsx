@@ -8,6 +8,7 @@ import Product from './views/product/Product';
 import MyAccount from './views/myAccount/MyAccount';
 import Registration from './views/registration/Registration';
 import Cart from './views/cart/Cart';
+import SearchProducts from './views/searchProducts/SearchProducts';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/store/:storeType" element={<Products />} />
             <Route path="/store/:storeType/:productName" element={<Product />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/search-products/:userSearch" element={<Products />}/>
           </Route>
         </Routes>
       </BrowserRouter>
