@@ -3,10 +3,15 @@
     &__title {
         background-color: var(--medium-gray);
         font-weight: 400;
+        padding: .5rem .75rem;
     }
 
     &__early-price {
         font-size: 1.25rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding: .5rem .75rem;
+        background-color: var(--medium-gray);
     }
 }
 
@@ -180,10 +185,14 @@
             cursor: pointer;
             transition: background .3s ease-in-out;
             transition: color .4s ease-in-out;
+            margin-bottom: 1rem;
         }
         &__btn:hover {
             background: var(--light-blue);
             color: var(--black);
+        }
+        &__info {
+            font-size: 1.5rem;
         }
     }
 }

@@ -42,10 +42,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
     const handleAddToCart = async (event: React.FC<HTMLFormElement> | any) => {
         try {
             event.preventDefault();
-            // TODO: 
-            // from event outputs
-            // get the id of the product
-            // add to cart the product_id and user_id as foreign keys
             if (storeType === "mac") {
                 if (productName !== "Mac Mini" && productName !== "Mac Pro" && productName !== "Mac Studio") {
 
@@ -237,7 +233,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productInfo, productColors })
                 {!user &&
                     <div className="product-form__add-to-cart">
                         <button className="product-form__add-to-cart__btn" disabled>הוסף לסל </button>
-                        <p>עלייך להירשם או להתחבר בכדי להוסיף מוצר זה לסל הקניות</p>
+                        <p className="product-form__add-to-cart__info">עלייך להירשם או להתחבר בכדי להוסיף מוצר זה לסל הקניות</p>
                     </div>
                 }
             </form>
